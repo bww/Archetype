@@ -1,0 +1,265 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D35BA14A176BC2C500CC1BFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35BA149176BC2C500CC1BFB /* Foundation.framework */; };
+		D35BA151176BC2C500CC1BFB /* archetype.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D35BA150176BC2C500CC1BFB /* archetype.1 */; };
+		D35BA15B176BC32500CC1BFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA15A176BC32500CC1BFB /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D35BA144176BC2C500CC1BFB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				D35BA151176BC2C500CC1BFB /* archetype.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D35BA146176BC2C500CC1BFB /* archetype */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = archetype; sourceTree = BUILT_PRODUCTS_DIR; };
+		D35BA149176BC2C500CC1BFB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D35BA14F176BC2C500CC1BFB /* Archetype-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Archetype-Prefix.pch"; path = "source/Archetype-Prefix.pch"; sourceTree = "<group>"; };
+		D35BA150176BC2C500CC1BFB /* archetype.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; name = archetype.1; path = resources/man1/archetype.1; sourceTree = "<group>"; };
+		D35BA15A176BC32500CC1BFB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D35BA15C176BC37E00CC1BFB /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D35BA143176BC2C500CC1BFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D35BA14A176BC2C500CC1BFB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D35BA13D176BC2C500CC1BFB = {
+			isa = PBXGroup;
+			children = (
+				D35BA14B176BC2C500CC1BFB /* Archetype */,
+				D35BA148176BC2C500CC1BFB /* Frameworks */,
+				D35BA147176BC2C500CC1BFB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D35BA147176BC2C500CC1BFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D35BA146176BC2C500CC1BFB /* archetype */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D35BA148176BC2C500CC1BFB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D35BA149176BC2C500CC1BFB /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D35BA14B176BC2C500CC1BFB /* Archetype */ = {
+			isa = PBXGroup;
+			children = (
+				D35BA157176BC31100CC1BFB /* Source */,
+				D35BA14E176BC2C500CC1BFB /* Supporting Files */,
+			);
+			path = Archetype;
+			sourceTree = "<group>";
+		};
+		D35BA14E176BC2C500CC1BFB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D35BA150176BC2C500CC1BFB /* archetype.1 */,
+				D35BA14F176BC2C500CC1BFB /* Archetype-Prefix.pch */,
+				D35BA15C176BC37E00CC1BFB /* project.xcconfig */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D35BA157176BC31100CC1BFB /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D35BA159176BC32500CC1BFB /* archetype */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D35BA159176BC32500CC1BFB /* archetype */ = {
+			isa = PBXGroup;
+			children = (
+				D35BA15A176BC32500CC1BFB /* main.m */,
+			);
+			name = archetype;
+			path = source/archetype;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D35BA145176BC2C500CC1BFB /* Archetype */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D35BA154176BC2C500CC1BFB /* Build configuration list for PBXNativeTarget "Archetype" */;
+			buildPhases = (
+				D35BA142176BC2C500CC1BFB /* Sources */,
+				D35BA143176BC2C500CC1BFB /* Frameworks */,
+				D35BA144176BC2C500CC1BFB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Archetype;
+			productName = Archetype;
+			productReference = D35BA146176BC2C500CC1BFB /* archetype */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D35BA13E176BC2C500CC1BFB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Brian William Wolter";
+			};
+			buildConfigurationList = D35BA141176BC2C500CC1BFB /* Build configuration list for PBXProject "Archetype" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D35BA13D176BC2C500CC1BFB;
+			productRefGroup = D35BA147176BC2C500CC1BFB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D35BA145176BC2C500CC1BFB /* Archetype */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D35BA142176BC2C500CC1BFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D35BA15B176BC32500CC1BFB /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D35BA152176BC2C500CC1BFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D35BA15C176BC37E00CC1BFB /* project.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		D35BA153176BC2C500CC1BFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D35BA15C176BC37E00CC1BFB /* project.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+			};
+			name = Release;
+		};
+		D35BA155176BC2C500CC1BFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Archetype/source/Archetype-Prefix.pch";
+				OTHER_CFLAGS = "-D__ARCHETYPE_DEBUG__";
+				PRODUCT_NAME = archetype;
+			};
+			name = Debug;
+		};
+		D35BA156176BC2C500CC1BFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Archetype/source/Archetype-Prefix.pch";
+				PRODUCT_NAME = archetype;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D35BA141176BC2C500CC1BFB /* Build configuration list for PBXProject "Archetype" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D35BA152176BC2C500CC1BFB /* Debug */,
+				D35BA153176BC2C500CC1BFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D35BA154176BC2C500CC1BFB /* Build configuration list for PBXNativeTarget "Archetype" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D35BA155176BC2C500CC1BFB /* Debug */,
+				D35BA156176BC2C500CC1BFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D35BA13E176BC2C500CC1BFB /* Project object */;
+}

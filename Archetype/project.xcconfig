@@ -1,0 +1,4 @@
+
+SDKROOT = macosx
+ARCHS = $(NATIVE_ARCH_ACTUAL)
+
