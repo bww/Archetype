@@ -10,6 +10,8 @@
 		D35BA14A176BC2C500CC1BFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35BA149176BC2C500CC1BFB /* Foundation.framework */; };
 		D35BA151176BC2C500CC1BFB /* archetype.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D35BA150176BC2C500CC1BFB /* archetype.1 */; };
 		D35BA15B176BC32500CC1BFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA15A176BC32500CC1BFB /* main.m */; };
+		D35BA15E176BCA2200CC1BFB /* Git2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35BA15D176BCA2200CC1BFB /* Git2.framework */; };
+		D35BA164176BCE6C00CC1BFB /* ARContext.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA163176BCE6C00CC1BFB /* ARContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +34,9 @@
 		D35BA150176BC2C500CC1BFB /* archetype.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; name = archetype.1; path = resources/man1/archetype.1; sourceTree = "<group>"; };
 		D35BA15A176BC32500CC1BFB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D35BA15C176BC37E00CC1BFB /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
+		D35BA15D176BCA2200CC1BFB /* Git2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Git2.framework; path = Archetype/library/Git2.framework; sourceTree = "<group>"; };
+		D35BA162176BCE6C00CC1BFB /* ARContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARContext.h; sourceTree = "<group>"; };
+		D35BA163176BCE6C00CC1BFB /* ARContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +45,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D35BA14A176BC2C500CC1BFB /* Foundation.framework in Frameworks */,
+				D35BA15E176BCA2200CC1BFB /* Git2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				D35BA149176BC2C500CC1BFB /* Foundation.framework */,
+				D35BA15D176BCA2200CC1BFB /* Git2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -101,6 +108,8 @@
 		D35BA159176BC32500CC1BFB /* archetype */ = {
 			isa = PBXGroup;
 			children = (
+				D35BA162176BCE6C00CC1BFB /* ARContext.h */,
+				D35BA163176BCE6C00CC1BFB /* ARContext.m */,
 				D35BA15A176BC32500CC1BFB /* main.m */,
 			);
 			name = archetype;
@@ -159,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D35BA15B176BC32500CC1BFB /* main.m in Sources */,
+				D35BA164176BCE6C00CC1BFB /* ARContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +233,10 @@
 		D35BA155176BC2C500CC1BFB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Archetype/library\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Archetype/source/Archetype-Prefix.pch";
 				OTHER_CFLAGS = "-D__ARCHETYPE_DEBUG__";
@@ -233,6 +247,10 @@
 		D35BA156176BC2C500CC1BFB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Archetype/library\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Archetype/source/Archetype-Prefix.pch";
 				PRODUCT_NAME = archetype;
