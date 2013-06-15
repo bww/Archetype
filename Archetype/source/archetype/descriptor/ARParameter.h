@@ -21,18 +21,21 @@
 // 
 
 /**
- * An archetype descriptor describes how to generate a project from its
- * archetype. This represents the archetype.json file.
+ * A parameter used in an archetype descriptor
  */
-@interface ARDescriptor : NSObject {
+@interface ARParameter : NSObject {
   
-  NSDictionary * _descriptor;
+  NSString  * _identifier;
+  NSString  * _name;
   
 }
 
-+(ARDescriptor *)descriptorWithContentsOfURL:(NSURL *)url error:(NSError **)error;
++(ARParameter *)parameterWithIdentifier:(NSString *)identifier name:(NSString *)name;
 
--(id)initWithContentsOfURL:(NSURL *)url error:(NSError **)error;
+-(id)initWithIdentifier:(NSString *)identifier name:(NSString *)name;
+
+@property (readonly) NSString * identifier;
+@property (readonly) NSString * name;
 
 @end
 

@@ -43,7 +43,6 @@
  */
 +(ARFetcher *)fetcherForURL:(NSURL *)url {
   NSString *scheme = url.scheme;
-  BOOL directory = FALSE;
   
   if([scheme caseInsensitiveCompare:@"ssh"] == NSOrderedSame){
     NSLog(@"GIT: %@", [url absoluteString]);
@@ -55,7 +54,7 @@
     NSLog(@"GIT: %@", [url absoluteString]);
   }else if([scheme caseInsensitiveCompare:@"git"] == NSOrderedSame){
     NSLog(@"GIT: %@", [url absoluteString]);
-  }else if([scheme caseInsensitiveCompare:@"file"] == NSOrderedSame && [[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&directory] && directory){
+  }else if([url isFileURL]){
     NSLog(@"DIR: %@", [url absoluteString]);
   }
   

@@ -80,3 +80,6 @@ typedef enum {
     nil]]
 #endif
 
+void ARErrorDisplayError(NSError *error, NSString *format, ...);
+void ARErrorDisplayBacktrace(NSError *error);
+

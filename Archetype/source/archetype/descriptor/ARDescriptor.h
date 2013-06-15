@@ -20,34 +20,24 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-#import "ARLog.h"
-
-static ARLogLevel __ARLogLevel = kARLogLevelInfo;
-
 /**
- * Obtain the application wide log level
+ * An archetype descriptor describes how to generate a project from its
+ * archetype. This represents the archetype.json file.
  */
-ARLogLevel __ARGetLogLevel(void) {
-  return __ARLogLevel;
+@interface ARDescriptor : NSObject {
+  
+  NSDictionary  * _descriptor;
+  NSString      * _name;
+  NSArray       * _parameters;
+  
 }
 
-/**
- * Obtain the application wide log level
- */
-void __ARSetLogLevel(ARLogLevel level) {
-  __ARLogLevel = level;
-}
++(ARDescriptor *)descriptorWithContentsOfURL:(NSURL *)url error:(NSError **)error;
 
-/**
- * Log a message
- */
-void __ARLog(int level, NSString *format, ...) {
-  if(level <= __ARLogLevel){
-    va_list ap;
-    va_start(ap, format);
-    fputs([[[[NSString alloc] initWithFormat:format arguments:ap] autorelease] UTF8String], stderr);
-    fputc('\n', stderr);
-    va_end(ap);
-  }
-}
+-(id)initWithContentsOfURL:(NSURL *)url error:(NSError **)error;
+
+@property (readonly) NSString * name;
+@property (readonly) NSArray  * parameters;
+
+@end
 

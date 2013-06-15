@@ -20,53 +20,38 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-#import "ARDescriptor.h"
+#import "ARParameter.h"
 
-@implementation ARDescriptor
+@implementation ARParameter
+
+@synthesize identifier = _identifier;
+@synthesize name = _name;
 
 /**
- * Create a descriptor from the provided resource
+ * Create a parameter
  */
-+(ARDescriptor *)descriptorWithContentsOfURL:(NSURL *)url error:(NSError **)error {
-  return [[(ARDescriptor *)[self alloc] initWithContentsOfURL:url error:error] autorelease];
++(ARParameter *)parameterWithIdentifier:(NSString *)identifier name:(NSString *)name {
+  return [[[self alloc] initWithIdentifier:identifier name:name] autorelease];
 }
 
 /**
  * Clean up
  */
 -(void)dealloc {
-  [_descriptor release];
+  [_identifier release];
+  [_name release];
   [super dealloc];
 }
 
 /**
  * Initialize
  */
--(id)initWithContentsOfURL:(NSURL *)url error:(NSError **)error {
+-(id)initWithIdentifier:(NSString *)identifier name:(NSString *)name {
   if((self = [super init]) != nil){
-    NSError *inner = nil;
-    
-    NSData *data;
-    if((data = [NSData dataWithContentsOfURL:url options:0 error:&inner]) == nil){
-      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not read archetype descriptor");
-      goto error;
-    }
-    
-    NSDictionary *descriptor;
-    if((descriptor = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&inner]) == nil){
-      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not parse archetype descriptor");
-      goto error;
-    }else if(![descriptor isKindOfClass:[NSDictionary class]]){
-      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Archetype descriptor must be an object");
-      goto error;
-    }
-    
-    _descriptor = [descriptor retain];
-    
+    _identifier = [identifier retain];
+    _name = [name retain];
   }
   return self;
-error:
-  [self release]; return nil;
 }
 
 @end

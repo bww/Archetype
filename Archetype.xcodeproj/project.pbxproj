@@ -13,13 +13,15 @@
 		D35BA15E176BCA2200CC1BFB /* Git2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35BA15D176BCA2200CC1BFB /* Git2.framework */; };
 		D35BA164176BCE6C00CC1BFB /* ARContext.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA163176BCE6C00CC1BFB /* ARContext.m */; };
 		D38344FB176CF074008A8194 /* ARLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D38344FA176CF074008A8194 /* ARLog.m */; };
-		D38344FE176CF31A008A8194 /* ARFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D38344FD176CF31A008A8194 /* ARFetcher.m */; };
 		D3834504176CFE40008A8194 /* ARFileFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834501176CFE40008A8194 /* ARFileFetcher.m */; };
 		D3834505176CFE40008A8194 /* ARGitFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834503176CFE40008A8194 /* ARGitFetcher.m */; };
 		D3834508176CFFEE008A8194 /* ARUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834507176CFFEE008A8194 /* ARUtility.m */; };
 		D383450B176D0E13008A8194 /* ARConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D383450A176D0E13008A8194 /* ARConfig.m */; };
-		D383450E176D12BA008A8194 /* ARDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D383450D176D12BA008A8194 /* ARDescriptor.m */; };
 		D3834513176D133E008A8194 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834512176D133E008A8194 /* JSONKit.m */; };
+		D3834516176D15D4008A8194 /* ARError.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834515176D15D4008A8194 /* ARError.m */; };
+		D383451A176D192B008A8194 /* ARDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834519176D192B008A8194 /* ARDescriptor.m */; };
+		D383451D176D1B6F008A8194 /* ARFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D383451C176D1B6F008A8194 /* ARFetcher.m */; };
+		D3834520176D1C89008A8194 /* ARParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383451F176D1C89008A8194 /* ARParameter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,8 +49,6 @@
 		D35BA163176BCE6C00CC1BFB /* ARContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARContext.m; sourceTree = "<group>"; };
 		D38344F9176CF074008A8194 /* ARLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLog.h; sourceTree = "<group>"; };
 		D38344FA176CF074008A8194 /* ARLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLog.m; sourceTree = "<group>"; };
-		D38344FC176CF31A008A8194 /* ARFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFetcher.h; sourceTree = "<group>"; };
-		D38344FD176CF31A008A8194 /* ARFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFetcher.m; sourceTree = "<group>"; };
 		D3834500176CFE40008A8194 /* ARFileFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFileFetcher.h; sourceTree = "<group>"; };
 		D3834501176CFE40008A8194 /* ARFileFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFileFetcher.m; sourceTree = "<group>"; };
 		D3834502176CFE40008A8194 /* ARGitFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGitFetcher.h; sourceTree = "<group>"; };
@@ -57,10 +57,16 @@
 		D3834507176CFFEE008A8194 /* ARUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARUtility.m; sourceTree = "<group>"; };
 		D3834509176D0E13008A8194 /* ARConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARConfig.h; sourceTree = "<group>"; };
 		D383450A176D0E13008A8194 /* ARConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARConfig.m; sourceTree = "<group>"; };
-		D383450C176D12BA008A8194 /* ARDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDescriptor.h; sourceTree = "<group>"; };
-		D383450D176D12BA008A8194 /* ARDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDescriptor.m; sourceTree = "<group>"; };
 		D3834511176D133E008A8194 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		D3834512176D133E008A8194 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		D3834514176D15D4008A8194 /* ARError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARError.h; sourceTree = "<group>"; };
+		D3834515176D15D4008A8194 /* ARError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARError.m; sourceTree = "<group>"; };
+		D3834518176D192B008A8194 /* ARDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDescriptor.h; sourceTree = "<group>"; };
+		D3834519176D192B008A8194 /* ARDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDescriptor.m; sourceTree = "<group>"; };
+		D383451B176D1B6F008A8194 /* ARFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFetcher.h; sourceTree = "<group>"; };
+		D383451C176D1B6F008A8194 /* ARFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFetcher.m; sourceTree = "<group>"; };
+		D383451E176D1C89008A8194 /* ARParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARParameter.h; sourceTree = "<group>"; };
+		D383451F176D1C89008A8194 /* ARParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARParameter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,19 +139,18 @@
 		D35BA159176BC32500CC1BFB /* archetype */ = {
 			isa = PBXGroup;
 			children = (
+				D3834517176D192B008A8194 /* descriptor */,
 				D38344FF176CFE40008A8194 /* fetcher */,
 				D35BA162176BCE6C00CC1BFB /* ARContext.h */,
 				D35BA163176BCE6C00CC1BFB /* ARContext.m */,
 				D38344F9176CF074008A8194 /* ARLog.h */,
 				D38344FA176CF074008A8194 /* ARLog.m */,
-				D38344FC176CF31A008A8194 /* ARFetcher.h */,
-				D38344FD176CF31A008A8194 /* ARFetcher.m */,
 				D3834506176CFFEE008A8194 /* ARUtility.h */,
 				D3834507176CFFEE008A8194 /* ARUtility.m */,
 				D3834509176D0E13008A8194 /* ARConfig.h */,
 				D383450A176D0E13008A8194 /* ARConfig.m */,
-				D383450C176D12BA008A8194 /* ARDescriptor.h */,
-				D383450D176D12BA008A8194 /* ARDescriptor.m */,
+				D3834514176D15D4008A8194 /* ARError.h */,
+				D3834515176D15D4008A8194 /* ARError.m */,
 				D35BA15A176BC32500CC1BFB /* main.m */,
 			);
 			name = archetype;
@@ -155,6 +160,8 @@
 		D38344FF176CFE40008A8194 /* fetcher */ = {
 			isa = PBXGroup;
 			children = (
+				D383451B176D1B6F008A8194 /* ARFetcher.h */,
+				D383451C176D1B6F008A8194 /* ARFetcher.m */,
 				D3834500176CFE40008A8194 /* ARFileFetcher.h */,
 				D3834501176CFE40008A8194 /* ARFileFetcher.m */,
 				D3834502176CFE40008A8194 /* ARGitFetcher.h */,
@@ -179,6 +186,17 @@
 				D3834512176D133E008A8194 /* JSONKit.m */,
 			);
 			path = json;
+			sourceTree = "<group>";
+		};
+		D3834517176D192B008A8194 /* descriptor */ = {
+			isa = PBXGroup;
+			children = (
+				D3834518176D192B008A8194 /* ARDescriptor.h */,
+				D3834519176D192B008A8194 /* ARDescriptor.m */,
+				D383451E176D1C89008A8194 /* ARParameter.h */,
+				D383451F176D1C89008A8194 /* ARParameter.m */,
+			);
+			path = descriptor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,13 +253,15 @@
 				D35BA15B176BC32500CC1BFB /* main.m in Sources */,
 				D35BA164176BCE6C00CC1BFB /* ARContext.m in Sources */,
 				D38344FB176CF074008A8194 /* ARLog.m in Sources */,
-				D38344FE176CF31A008A8194 /* ARFetcher.m in Sources */,
 				D3834504176CFE40008A8194 /* ARFileFetcher.m in Sources */,
 				D3834505176CFE40008A8194 /* ARGitFetcher.m in Sources */,
 				D3834508176CFFEE008A8194 /* ARUtility.m in Sources */,
 				D383450B176D0E13008A8194 /* ARConfig.m in Sources */,
-				D383450E176D12BA008A8194 /* ARDescriptor.m in Sources */,
 				D3834513176D133E008A8194 /* JSONKit.m in Sources */,
+				D3834516176D15D4008A8194 /* ARError.m in Sources */,
+				D383451A176D192B008A8194 /* ARDescriptor.m in Sources */,
+				D383451D176D1B6F008A8194 /* ARFetcher.m in Sources */,
+				D3834520176D1C89008A8194 /* ARParameter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

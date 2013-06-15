@@ -25,6 +25,7 @@
 #import "ARContext.h"
 #import "ARConfig.h"
 #import "ARFetcher.h"
+#import "ARDescriptor.h"
 #import "ARUtility.h"
 
 int   ARRun(int argc, const char * argv[]);
@@ -46,6 +47,7 @@ int main(int argc, const char * argv[]) {
 int ARRun(int argc, const char * argv[]) {
   ARMutableContext *context = [ARMutableContext context];
   ARConfig *config = [ARConfig config];
+  NSError *error = nil;
   
   static struct option longopts[] = {
     { "output",           required_argument,  NULL,         'o' },  // base path for output
@@ -87,8 +89,6 @@ int ARRun(int argc, const char * argv[]) {
     }
   }
   
-  NSLog(@"OK: %@", config.properties);
-  
   argv += optind;
   argc -= optind;
   
@@ -98,7 +98,18 @@ int ARRun(int argc, const char * argv[]) {
   }
   
   NSLog(@"OK: %@", ARPathGetWorkingDirectory());
-  [ARFetcher fetcherForURL:[ARFetcher URLForResource:[NSString stringWithUTF8String:argv[0]]]];
+  
+  NSString *source = [NSString stringWithUTF8String:argv[0]];
+  [ARFetcher fetcherForURL:[ARFetcher URLForResource:source]];
+  
+  ARDescriptor *descriptor;
+  if((descriptor = [ARDescriptor descriptorWithContentsOfURL:[NSURL fileURLWithPath:source] error:&error]) == nil){
+    ARErrorDisplayError(error, @"could not load descriptor");
+    goto error;
+  }
+  
+  NSLog(@"OK: %@", descriptor.name);
+  NSLog(@"OK: %@", descriptor.parameters);
   
 error:
   ARPathDeleteWorkingDirectory();
