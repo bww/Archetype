@@ -17,6 +17,9 @@
 		D3834504176CFE40008A8194 /* ARFileFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834501176CFE40008A8194 /* ARFileFetcher.m */; };
 		D3834505176CFE40008A8194 /* ARGitFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834503176CFE40008A8194 /* ARGitFetcher.m */; };
 		D3834508176CFFEE008A8194 /* ARUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834507176CFFEE008A8194 /* ARUtility.m */; };
+		D383450B176D0E13008A8194 /* ARConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D383450A176D0E13008A8194 /* ARConfig.m */; };
+		D383450E176D12BA008A8194 /* ARDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D383450D176D12BA008A8194 /* ARDescriptor.m */; };
+		D3834513176D133E008A8194 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834512176D133E008A8194 /* JSONKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +55,12 @@
 		D3834503176CFE40008A8194 /* ARGitFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGitFetcher.m; sourceTree = "<group>"; };
 		D3834506176CFFEE008A8194 /* ARUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARUtility.h; sourceTree = "<group>"; };
 		D3834507176CFFEE008A8194 /* ARUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARUtility.m; sourceTree = "<group>"; };
+		D3834509176D0E13008A8194 /* ARConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARConfig.h; sourceTree = "<group>"; };
+		D383450A176D0E13008A8194 /* ARConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARConfig.m; sourceTree = "<group>"; };
+		D383450C176D12BA008A8194 /* ARDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDescriptor.h; sourceTree = "<group>"; };
+		D383450D176D12BA008A8194 /* ARDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDescriptor.m; sourceTree = "<group>"; };
+		D3834511176D133E008A8194 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		D3834512176D133E008A8194 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +124,7 @@
 		D35BA157176BC31100CC1BFB /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D383450F176D133E008A8194 /* external */,
 				D35BA159176BC32500CC1BFB /* archetype */,
 			);
 			name = Source;
@@ -132,6 +142,10 @@
 				D38344FD176CF31A008A8194 /* ARFetcher.m */,
 				D3834506176CFFEE008A8194 /* ARUtility.h */,
 				D3834507176CFFEE008A8194 /* ARUtility.m */,
+				D3834509176D0E13008A8194 /* ARConfig.h */,
+				D383450A176D0E13008A8194 /* ARConfig.m */,
+				D383450C176D12BA008A8194 /* ARDescriptor.h */,
+				D383450D176D12BA008A8194 /* ARDescriptor.m */,
 				D35BA15A176BC32500CC1BFB /* main.m */,
 			);
 			name = archetype;
@@ -147,6 +161,24 @@
 				D3834503176CFE40008A8194 /* ARGitFetcher.m */,
 			);
 			path = fetcher;
+			sourceTree = "<group>";
+		};
+		D383450F176D133E008A8194 /* external */ = {
+			isa = PBXGroup;
+			children = (
+				D3834510176D133E008A8194 /* json */,
+			);
+			name = external;
+			path = source/external;
+			sourceTree = "<group>";
+		};
+		D3834510176D133E008A8194 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				D3834511176D133E008A8194 /* JSONKit.h */,
+				D3834512176D133E008A8194 /* JSONKit.m */,
+			);
+			path = json;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +239,9 @@
 				D3834504176CFE40008A8194 /* ARFileFetcher.m in Sources */,
 				D3834505176CFE40008A8194 /* ARGitFetcher.m in Sources */,
 				D3834508176CFFEE008A8194 /* ARUtility.m in Sources */,
+				D383450B176D0E13008A8194 /* ARConfig.m in Sources */,
+				D383450E176D12BA008A8194 /* ARDescriptor.m in Sources */,
+				D3834513176D133E008A8194 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

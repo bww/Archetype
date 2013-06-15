@@ -1,0 +1,73 @@
+// 
+// Copyright 2013 Brian William Wolter, All rights reserved.
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+// 
+
+#import "ARDescriptor.h"
+
+@implementation ARDescriptor
+
+/**
+ * Create a descriptor from the provided resource
+ */
++(ARDescriptor *)descriptorWithContentsOfURL:(NSURL *)url error:(NSError **)error {
+  return [[(ARDescriptor *)[self alloc] initWithContentsOfURL:url error:error] autorelease];
+}
+
+/**
+ * Clean up
+ */
+-(void)dealloc {
+  [_descriptor release];
+  [super dealloc];
+}
+
+/**
+ * Initialize
+ */
+-(id)initWithContentsOfURL:(NSURL *)url error:(NSError **)error {
+  if((self = [super init]) != nil){
+    NSError *inner = nil;
+    
+    NSData *data;
+    if((data = [NSData dataWithContentsOfURL:url options:0 error:&inner]) == nil){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not read archetype descriptor");
+      goto error;
+    }
+    
+    NSDictionary *descriptor;
+    if((descriptor = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&inner]) == nil){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not parse archetype descriptor");
+      goto error;
+    }else if(![descriptor isKindOfClass:[NSDictionary class]]){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Archetype descriptor must be an object");
+      goto error;
+    }
+    
+    _descriptor = [descriptor retain];
+    
+  }
+  return self;
+error:
+  [self release]; return nil;
+}
+
+@end
+

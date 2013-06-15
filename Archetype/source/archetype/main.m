@@ -23,6 +23,7 @@
 #import <getopt.h>
 
 #import "ARContext.h"
+#import "ARConfig.h"
 #import "ARFetcher.h"
 #import "ARUtility.h"
 
@@ -44,17 +45,19 @@ int main(int argc, const char * argv[]) {
  */
 int ARRun(int argc, const char * argv[]) {
   ARMutableContext *context = [ARMutableContext context];
+  ARConfig *config = [ARConfig config];
   
   static struct option longopts[] = {
     { "output",           required_argument,  NULL,         'o' },  // base path for output
-    { "debug",            no_argument,        NULL,         'D' },  // debug mode
+    { "define",           required_argument,  NULL,         'D' },  // define a property
+    { "debug",            no_argument,        NULL,         'd' },  // debug mode
     { "verbose",          no_argument,        NULL,         'v' },  // be more verbose
     { "help",             no_argument,        NULL,         'h' },  // display help info
     { NULL,               0,                  NULL,          0  }
   };
   
   int flag;
-  while((flag = getopt_long(argc, (char **)argv, "o:Dvh", longopts, NULL)) != -1){
+  while((flag = getopt_long(argc, (char **)argv, "o:D:dvh", longopts, NULL)) != -1){
     switch(flag){
       
       case 'o':
@@ -62,6 +65,10 @@ int ARRun(int argc, const char * argv[]) {
         break;
         
       case 'D':
+        [config setPropertyWithKeyValueDescriptor:[NSString stringWithUTF8String:optarg]];
+        break;
+        
+      case 'd':
         context.options |= kAROptionDebug;
         break;
         
@@ -79,6 +86,8 @@ int ARRun(int argc, const char * argv[]) {
         
     }
   }
+  
+  NSLog(@"OK: %@", config.properties);
   
   argv += optind;
   argc -= optind;
