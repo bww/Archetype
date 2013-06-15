@@ -23,6 +23,8 @@
 #import <getopt.h>
 
 #import "ARContext.h"
+#import "ARFetcher.h"
+#import "ARUtility.h"
 
 int   ARRun(int argc, const char * argv[]);
 void  ARUsage(FILE *stream);
@@ -69,11 +71,11 @@ int ARRun(int argc, const char * argv[]) {
         
       case 'h':
         ARUsage(stderr);
-        return 0;
+        goto error;
         
       default:
         ARUsage(stderr);
-        return 0;
+        goto error;
         
     }
   }
@@ -83,8 +85,14 @@ int ARRun(int argc, const char * argv[]) {
   
   if(argc < 1){
     ARUsage(stderr);
-    return 0;
+    goto error;
   }
+  
+  NSLog(@"OK: %@", ARPathGetWorkingDirectory());
+  [ARFetcher fetcherForURL:[ARFetcher URLForResource:[NSString stringWithUTF8String:argv[0]]]];
+  
+error:
+  ARPathDeleteWorkingDirectory();
   
   return 0;
 }

@@ -12,6 +12,11 @@
 		D35BA15B176BC32500CC1BFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA15A176BC32500CC1BFB /* main.m */; };
 		D35BA15E176BCA2200CC1BFB /* Git2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35BA15D176BCA2200CC1BFB /* Git2.framework */; };
 		D35BA164176BCE6C00CC1BFB /* ARContext.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA163176BCE6C00CC1BFB /* ARContext.m */; };
+		D38344FB176CF074008A8194 /* ARLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D38344FA176CF074008A8194 /* ARLog.m */; };
+		D38344FE176CF31A008A8194 /* ARFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D38344FD176CF31A008A8194 /* ARFetcher.m */; };
+		D3834504176CFE40008A8194 /* ARFileFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834501176CFE40008A8194 /* ARFileFetcher.m */; };
+		D3834505176CFE40008A8194 /* ARGitFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834503176CFE40008A8194 /* ARGitFetcher.m */; };
+		D3834508176CFFEE008A8194 /* ARUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834507176CFFEE008A8194 /* ARUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +42,16 @@
 		D35BA15D176BCA2200CC1BFB /* Git2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Git2.framework; path = Archetype/library/Git2.framework; sourceTree = "<group>"; };
 		D35BA162176BCE6C00CC1BFB /* ARContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARContext.h; sourceTree = "<group>"; };
 		D35BA163176BCE6C00CC1BFB /* ARContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARContext.m; sourceTree = "<group>"; };
+		D38344F9176CF074008A8194 /* ARLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLog.h; sourceTree = "<group>"; };
+		D38344FA176CF074008A8194 /* ARLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLog.m; sourceTree = "<group>"; };
+		D38344FC176CF31A008A8194 /* ARFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFetcher.h; sourceTree = "<group>"; };
+		D38344FD176CF31A008A8194 /* ARFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFetcher.m; sourceTree = "<group>"; };
+		D3834500176CFE40008A8194 /* ARFileFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFileFetcher.h; sourceTree = "<group>"; };
+		D3834501176CFE40008A8194 /* ARFileFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFileFetcher.m; sourceTree = "<group>"; };
+		D3834502176CFE40008A8194 /* ARGitFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGitFetcher.h; sourceTree = "<group>"; };
+		D3834503176CFE40008A8194 /* ARGitFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGitFetcher.m; sourceTree = "<group>"; };
+		D3834506176CFFEE008A8194 /* ARUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARUtility.h; sourceTree = "<group>"; };
+		D3834507176CFFEE008A8194 /* ARUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARUtility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +123,30 @@
 		D35BA159176BC32500CC1BFB /* archetype */ = {
 			isa = PBXGroup;
 			children = (
+				D38344FF176CFE40008A8194 /* fetcher */,
 				D35BA162176BCE6C00CC1BFB /* ARContext.h */,
 				D35BA163176BCE6C00CC1BFB /* ARContext.m */,
+				D38344F9176CF074008A8194 /* ARLog.h */,
+				D38344FA176CF074008A8194 /* ARLog.m */,
+				D38344FC176CF31A008A8194 /* ARFetcher.h */,
+				D38344FD176CF31A008A8194 /* ARFetcher.m */,
+				D3834506176CFFEE008A8194 /* ARUtility.h */,
+				D3834507176CFFEE008A8194 /* ARUtility.m */,
 				D35BA15A176BC32500CC1BFB /* main.m */,
 			);
 			name = archetype;
 			path = source/archetype;
+			sourceTree = "<group>";
+		};
+		D38344FF176CFE40008A8194 /* fetcher */ = {
+			isa = PBXGroup;
+			children = (
+				D3834500176CFE40008A8194 /* ARFileFetcher.h */,
+				D3834501176CFE40008A8194 /* ARFileFetcher.m */,
+				D3834502176CFE40008A8194 /* ARGitFetcher.h */,
+				D3834503176CFE40008A8194 /* ARGitFetcher.m */,
+			);
+			path = fetcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +202,11 @@
 			files = (
 				D35BA15B176BC32500CC1BFB /* main.m in Sources */,
 				D35BA164176BCE6C00CC1BFB /* ARContext.m in Sources */,
+				D38344FB176CF074008A8194 /* ARLog.m in Sources */,
+				D38344FE176CF31A008A8194 /* ARFetcher.m in Sources */,
+				D3834504176CFE40008A8194 /* ARFileFetcher.m in Sources */,
+				D3834505176CFE40008A8194 /* ARGitFetcher.m in Sources */,
+				D3834508176CFFEE008A8194 /* ARUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +314,7 @@
 				D35BA156176BC2C500CC1BFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
