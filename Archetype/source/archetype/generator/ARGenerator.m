@@ -21,6 +21,7 @@
 // 
 
 #import "ARGenerator.h"
+#import "ARRelocator.h"
 
 @implementation ARGenerator
 
@@ -58,6 +59,7 @@
  * Generate a project
  */
 -(BOOL)generateWithSourceURL:(NSURL *)sourceURL outputURL:(NSURL *)outputURL error:(NSError **)error {
+  ARRelocator *relocator = [ARRelocator relocatorWithSourceBaseURL:sourceURL outputBaseURL:outputURL];
   NSError *inner = nil;
   BOOL status = FALSE;
   
@@ -77,11 +79,21 @@
     }
     
     if([name caseInsensitiveCompare:kARDescriptorStandardResourcePath] == NSOrderedSame){
-      // skip the archetype descriptor file, we don't include that
+      // skip the archetype descriptor file, obviously
       continue;
     }
     
-    ARLog(@"OK: %@", name);
+    NSNumber *directory;
+    if(![url getResourceValue:&directory forKey:NSURLIsDirectoryKey error:&inner]){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not obtain URL resource");
+      goto error;
+    }
+    
+    NSURL *destURL;
+    if((destURL = [relocator outputURLForSourceURL:url error:&inner]) == nil){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not relocate file");
+      goto error;
+    }
     
   }
   

@@ -23,6 +23,8 @@
 		D383451D176D1B6F008A8194 /* ARFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D383451C176D1B6F008A8194 /* ARFetcher.m */; };
 		D3834520176D1C89008A8194 /* ARParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383451F176D1C89008A8194 /* ARParameter.m */; };
 		D3834527176E5D88008A8194 /* ARGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834526176E5D88008A8194 /* ARGenerator.m */; };
+		D383452A176E782A008A8194 /* ARRelocator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834529176E782A008A8194 /* ARRelocator.m */; };
+		D383452D176E812A008A8194 /* ARFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383452C176E812A008A8194 /* ARFilter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +72,10 @@
 		D383451F176D1C89008A8194 /* ARParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARParameter.m; sourceTree = "<group>"; };
 		D3834525176E5D88008A8194 /* ARGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGenerator.h; sourceTree = "<group>"; };
 		D3834526176E5D88008A8194 /* ARGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGenerator.m; sourceTree = "<group>"; };
+		D3834528176E782A008A8194 /* ARRelocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARRelocator.h; sourceTree = "<group>"; };
+		D3834529176E782A008A8194 /* ARRelocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARRelocator.m; sourceTree = "<group>"; };
+		D383452B176E812A008A8194 /* ARFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFilter.h; sourceTree = "<group>"; };
+		D383452C176E812A008A8194 /* ARFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFilter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +214,10 @@
 			children = (
 				D3834525176E5D88008A8194 /* ARGenerator.h */,
 				D3834526176E5D88008A8194 /* ARGenerator.m */,
+				D3834528176E782A008A8194 /* ARRelocator.h */,
+				D3834529176E782A008A8194 /* ARRelocator.m */,
+				D383452B176E812A008A8194 /* ARFilter.h */,
+				D383452C176E812A008A8194 /* ARFilter.m */,
 			);
 			path = generator;
 			sourceTree = "<group>";
@@ -276,6 +286,8 @@
 				D383451D176D1B6F008A8194 /* ARFetcher.m in Sources */,
 				D3834520176D1C89008A8194 /* ARParameter.m in Sources */,
 				D3834527176E5D88008A8194 /* ARGenerator.m in Sources */,
+				D383452A176E782A008A8194 /* ARRelocator.m in Sources */,
+				D383452D176E812A008A8194 /* ARFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

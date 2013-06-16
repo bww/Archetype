@@ -24,23 +24,15 @@
 
 @implementation ARContext
 
+@synthesize options = _options;
+
 +(id)context {
   return [[[self alloc] init] autorelease];
 }
 
-@synthesize outputPath = _outputPath;
-@synthesize options = _options;
-
 @end
 
 @implementation ARMutableContext
-
--(void)setOutputPath:(NSString *)outputPath {
-  if(outputPath != _outputPath){
-    [_outputPath release];
-    _outputPath = [outputPath retain];
-  }
-}
 
 -(void)setOptions:(AROptions)options {
   _options = options;

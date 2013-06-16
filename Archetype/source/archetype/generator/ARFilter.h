@@ -20,35 +20,14 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-enum {
-  kAROptionNone     = 0,
-  kAROptionVerbose  = 1 << 0,
-  kAROptionDebug    = 1 << 1
-};
-
-typedef unsigned int AROptions;
+#import "ARConfig.h"
 
 /**
- * Archetype context. A context defines the parameters for generating a project
+ * Filters content
  */
-@interface ARContext : NSObject {
-  
-  AROptions _options;
-  
-}
+@interface ARFilter : NSObject
 
-+(id)context;
-
-@property (readonly) AROptions  options;
-
-@end
-
-/**
- * Mutable context
- */
-@interface ARMutableContext : ARContext
-
--(void)setOptions:(AROptions)options;
+-(NSString *)filter:(NSString *)content configuration:(ARConfig *)config error:(NSError **)error;
 
 @end
 

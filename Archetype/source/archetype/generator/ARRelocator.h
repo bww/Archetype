@@ -20,35 +20,28 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-enum {
-  kAROptionNone     = 0,
-  kAROptionVerbose  = 1 << 0,
-  kAROptionDebug    = 1 << 1
-};
-
-typedef unsigned int AROptions;
+#import "ARDescriptor.h"
+#import "ARConfig.h"
 
 /**
- * Archetype context. A context defines the parameters for generating a project
+ * Just relocates paths under roots.
  */
-@interface ARContext : NSObject {
+@interface ARRelocator : NSObject {
   
-  AROptions _options;
+  NSURL * _sourceBaseURL;
+  NSURL * _outputBaseURL;
   
 }
 
-+(id)context;
++(ARRelocator *)relocatorWithSourceBaseURL:(NSURL *)sourceBaseURL outputBaseURL:(NSURL *)outputBaseURL;
 
-@property (readonly) AROptions  options;
+-(id)initWithSourceBaseURL:(NSURL *)sourceBaseURL outputBaseURL:(NSURL *)outputBaseURL;
 
-@end
+-(NSURL *)outputURLForSourceURL:(NSURL *)sourceURL;
+-(NSURL *)outputURLForSourceURL:(NSURL *)sourceURL error:(NSError **)error;
 
-/**
- * Mutable context
- */
-@interface ARMutableContext : ARContext
-
--(void)setOptions:(AROptions)options;
+@property (readonly) NSURL * sourceBaseURL;
+@property (readonly) NSURL * outputBaseURL;
 
 @end
 

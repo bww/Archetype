@@ -54,7 +54,6 @@ int ARRun(int argc, const char * argv[]) {
   NSError *error = nil;
   
   static struct option longopts[] = {
-    { "output",           required_argument,  NULL,         'o' },  // base path for output
     { "define",           required_argument,  NULL,         'D' },  // define a property
     { "debug",            no_argument,        NULL,         'd' },  // debug mode
     { "verbose",          no_argument,        NULL,         'v' },  // be more verbose
@@ -63,13 +62,9 @@ int ARRun(int argc, const char * argv[]) {
   };
   
   int flag;
-  while((flag = getopt_long(argc, (char **)argv, "o:D:dvh", longopts, NULL)) != -1){
+  while((flag = getopt_long(argc, (char **)argv, "D:dvh", longopts, NULL)) != -1){
     switch(flag){
       
-      case 'o':
-        context.outputPath = [NSString stringWithUTF8String:optarg];
-        break;
-        
       case 'D':
         [config setPropertyWithKeyValueDescriptor:[NSString stringWithUTF8String:optarg]];
         break;
@@ -146,9 +141,6 @@ int ARRun(int argc, const char * argv[]) {
     goto error;
   }
   
-  ARLog(@"Archetype: %@", descriptor.name);
-  ARDebug(@"Working directory: %@", workingDirectory);
-  
   for(ARParameter *parameter in descriptor.parameters){
     NSString *value;
     if((value = [config propertyForKey:parameter.identifier]) == nil || [value length] < 1){
@@ -163,7 +155,6 @@ int ARRun(int argc, const char * argv[]) {
   }
   
   ARGenerator *generator = [ARGenerator generatorWithDescriptor:descriptor configuration:config];
-  
   if(![generator generateWithSourceURL:[NSURL fileURLWithPath:templateDirectory] outputURL:outputURL error:&error]){
     ARErrorDisplayError(error, @"Could not generate project");
     goto error;
@@ -187,12 +178,12 @@ void ARUsage(FILE *stream) {
     " Help: man archetype\n"
     "\n"
     "Options:\n"
-    " -o --output <path>            Specify the output directory for the generated project.\n"
+    " -D --define <key>=<value>     Define a configuration parameter.\n"
     " -v --verbose                  Be more verbose.\n"
     " -h --help                     Display this help information.\n"
     "\n"
     "Example:\n"
-    " $ archetype -o my_project git@github.com/user/project.git\n"
+    " $ archetype git@github.com/user/project.git ./my_project\n"
     "\n"
   , stream);
 }
