@@ -54,5 +54,47 @@
   return self;
 }
 
+/**
+ * Generate a project
+ */
+-(BOOL)generateWithSourceURL:(NSURL *)sourceURL outputURL:(NSURL *)outputURL error:(NSError **)error {
+  NSError *inner = nil;
+  BOOL status = FALSE;
+  
+  __block NSError *enumError = nil;
+  NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:sourceURL includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^ BOOL (NSURL *url, NSError *blockError) {
+    enumError = [blockError copy];
+    return FALSE;
+  }];
+  
+  for(NSURL *url in enumerator){
+    ARDebug(@"==> %@", [url path]);
+    
+    NSString *name;
+    if(![url getResourceValue:&name forKey:NSURLNameKey error:&inner]){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not obtain URL resource");
+      goto error;
+    }
+    
+    if([name caseInsensitiveCompare:kARDescriptorStandardResourcePath] == NSOrderedSame){
+      // skip the archetype descriptor file, we don't include that
+      continue;
+    }
+    
+    ARLog(@"OK: %@", name);
+    
+  }
+  
+  if(enumError != nil){
+    if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, enumError, @"Could not read directory");
+    [enumError release]; enumError = nil;
+    goto error;
+  }
+  
+  status = TRUE;
+error:
+  return status;
+}
+
 @end
 

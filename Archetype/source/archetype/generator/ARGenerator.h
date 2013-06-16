@@ -37,6 +37,8 @@
 
 -(id)initWithDescriptor:(ARDescriptor *)descriptor configuration:(ARConfig *)config;
 
+-(BOOL)generateWithSourceURL:(NSURL *)sourceURL outputURL:(NSURL *)outputURL error:(NSError **)error;
+
 @property (readonly) ARDescriptor * descriptor;
 @property (readonly) ARConfig     * config;
 

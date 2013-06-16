@@ -24,6 +24,8 @@
 #import "ARParameter.h"
 #import "JSONKit.h"
 
+NSString * const kARDescriptorStandardResourcePath = @"archetype.json";
+
 @implementation ARDescriptor
 
 @synthesize name = _name;

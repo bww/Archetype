@@ -20,6 +20,8 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
+extern NSString * const kARDescriptorStandardResourcePath;
+
 /**
  * An archetype descriptor describes how to generate a project from its
  * archetype. This represents the archetype.json file.

@@ -27,6 +27,7 @@
 #import "ARFetcher.h"
 #import "ARUtility.h"
 
+#import "ARGenerator.h"
 #import "ARDescriptor.h"
 #import "ARParameter.h"
 
@@ -133,9 +134,9 @@ int ARRun(int argc, const char * argv[]) {
     goto error;
   }
   
-  NSString *descriptorPath = [templateDirectory stringByAppendingPathComponent:@"archetype.json"];
+  NSString *descriptorPath = [templateDirectory stringByAppendingPathComponent:kARDescriptorStandardResourcePath];
   if(![[NSFileManager defaultManager] fileExistsAtPath:descriptorPath]){
-    ARLog(@"error: Archetype does not contain a descriptor named 'archetype.json'");
+    ARLog(@"error: Archetype does not contain a descriptor named '%@'", kARDescriptorStandardResourcePath);
     goto error;
   }
   
@@ -159,6 +160,13 @@ int ARRun(int argc, const char * argv[]) {
     for(id key in config.properties){
       ARLog(@"%@ = %@", key, [config propertyForKey:key]);
     }
+  }
+  
+  ARGenerator *generator = [ARGenerator generatorWithDescriptor:descriptor configuration:config];
+  
+  if(![generator generateWithSourceURL:[NSURL fileURLWithPath:templateDirectory] outputURL:outputURL error:&error]){
+    ARErrorDisplayError(error, @"Could not generate project");
+    goto error;
   }
   
 error:
