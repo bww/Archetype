@@ -25,8 +25,10 @@
 #import "ARContext.h"
 #import "ARConfig.h"
 #import "ARFetcher.h"
-#import "ARDescriptor.h"
 #import "ARUtility.h"
+
+#import "ARDescriptor.h"
+#import "ARParameter.h"
 
 int   ARRun(int argc, const char * argv[]);
 void  ARUsage(FILE *stream);
@@ -95,17 +97,28 @@ int ARRun(int argc, const char * argv[]) {
   argv += optind;
   argc -= optind;
   
-  if(argc < 1){
+  if(argc < 2){
     ARUsage(stderr);
     goto error;
   }
   
   NSString *source = [NSString stringWithUTF8String:argv[0]];
-  NSURL *url = [ARFetcher URLForResource:source];
+  NSURL *sourceURL = [ARFetcher URLForResource:source];
+  NSString *output = [NSString stringWithUTF8String:argv[1]];
+  NSURL *outputURL = [NSURL fileURLWithPath:output];
   
   ARFetcher *fetcher;
-  if((fetcher = [ARFetcher fetcherForURL:url]) == nil){
+  if((fetcher = [ARFetcher fetcherForURL:sourceURL]) == nil){
     ARLog(@"error: Resource type is not supported: %@", source);
+    goto error;
+  }
+  
+  BOOL exists, directory;
+  if((exists = [[NSFileManager defaultManager] fileExistsAtPath:[outputURL path] isDirectory:&directory]) && !directory){
+    ARLog(@"error: Output path exists, but is not a directory");
+    goto error;
+  }else if(!exists && ![[NSFileManager defaultManager] createDirectoryAtURL:outputURL withIntermediateDirectories:TRUE attributes:nil error:&error]){
+    ARErrorDisplayError(error, @"Could not create output directory");
     goto error;
   }
   
@@ -115,7 +128,7 @@ int ARRun(int argc, const char * argv[]) {
   }
   
   NSString *templateDirectory = [workingDirectory stringByAppendingPathComponent:@"template"];
-  if(![fetcher fetchContentsOfURL:url destination:templateDirectory progress:NULL error:&error]){
+  if(![fetcher fetchContentsOfURL:sourceURL destination:templateDirectory progress:NULL error:&error]){
     ARErrorDisplayError(error, @"Could not fetch archetype");
     goto error;
   }
@@ -132,14 +145,24 @@ int ARRun(int argc, const char * argv[]) {
     goto error;
   }
   
-  ARLog(@"%@", descriptor.name);
+  ARLog(@"Archetype: %@", descriptor.name);
+  ARDebug(@"Working directory: %@", workingDirectory);
   
   for(ARParameter *parameter in descriptor.parameters){
-    [config collectPropertyForParameter:parameter];
+    NSString *value;
+    if((value = [config propertyForKey:parameter.identifier]) == nil || [value length] < 1){
+      [config collectPropertyForParameter:parameter];
+    }
+  }
+  
+  if((context.options & kAROptionDebug) == kAROptionDebug){
+    for(id key in config.properties){
+      ARLog(@"%@ = %@", key, [config propertyForKey:key]);
+    }
   }
   
 error:
-  if(workingDirectory) NSLog(@"WORKING: %@", workingDirectory); //ARPathDeleteWorkingDirectory(workingDirectory);
+  if(workingDirectory) ARPathDeleteWorkingDirectory(workingDirectory);
   
   return 0;
 }
@@ -152,7 +175,7 @@ void ARUsage(FILE *stream) {
     "Archetype - a parameterized project template generator\n"
     "Copyright 2013 Brian William Wolter\n"
     "\n"
-    "Usage: archetype [options] <url>\n"
+    "Usage: archetype [options] <url> <path>\n"
     " Help: man archetype\n"
     "\n"
     "Options:\n"

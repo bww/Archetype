@@ -22,6 +22,7 @@
 		D383451A176D192B008A8194 /* ARDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834519176D192B008A8194 /* ARDescriptor.m */; };
 		D383451D176D1B6F008A8194 /* ARFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D383451C176D1B6F008A8194 /* ARFetcher.m */; };
 		D3834520176D1C89008A8194 /* ARParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383451F176D1C89008A8194 /* ARParameter.m */; };
+		D3834523176E4771008A8194 /* ARGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834522176E4771008A8194 /* ARGenerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +68,8 @@
 		D383451C176D1B6F008A8194 /* ARFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFetcher.m; sourceTree = "<group>"; };
 		D383451E176D1C89008A8194 /* ARParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARParameter.h; sourceTree = "<group>"; };
 		D383451F176D1C89008A8194 /* ARParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARParameter.m; sourceTree = "<group>"; };
+		D3834521176E4771008A8194 /* ARGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGenerator.h; sourceTree = "<group>"; };
+		D3834522176E4771008A8194 /* ARGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGenerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 				D3834507176CFFEE008A8194 /* ARUtility.m */,
 				D3834509176D0E13008A8194 /* ARConfig.h */,
 				D383450A176D0E13008A8194 /* ARConfig.m */,
+				D3834521176E4771008A8194 /* ARGenerator.h */,
+				D3834522176E4771008A8194 /* ARGenerator.m */,
 				D3834514176D15D4008A8194 /* ARError.h */,
 				D3834515176D15D4008A8194 /* ARError.m */,
 				D35BA15A176BC32500CC1BFB /* main.m */,
@@ -262,6 +267,7 @@
 				D383451A176D192B008A8194 /* ARDescriptor.m in Sources */,
 				D383451D176D1B6F008A8194 /* ARFetcher.m in Sources */,
 				D3834520176D1C89008A8194 /* ARParameter.m in Sources */,
+				D3834523176E4771008A8194 /* ARGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
