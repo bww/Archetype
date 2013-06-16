@@ -46,6 +46,7 @@ int main(int argc, const char * argv[]) {
  */
 int ARRun(int argc, const char * argv[]) {
   ARMutableContext *context = [ARMutableContext context];
+  NSString *workingDirectory = nil;
   ARConfig *config = [ARConfig config];
   NSError *error = nil;
   
@@ -72,10 +73,12 @@ int ARRun(int argc, const char * argv[]) {
         
       case 'd':
         context.options |= kAROptionDebug;
+        __ARSetLogLevel(MAX(__ARGetLogLevel(), kARLogLevelDebug));
         break;
         
       case 'v':
         context.options |= kAROptionVerbose;
+        __ARSetLogLevel(MAX(__ARGetLogLevel(), kARLogLevelVerbose));
         break;
         
       case 'h':
@@ -97,22 +100,46 @@ int ARRun(int argc, const char * argv[]) {
     goto error;
   }
   
-  NSLog(@"OK: %@", ARPathGetWorkingDirectory());
-  
   NSString *source = [NSString stringWithUTF8String:argv[0]];
-  [ARFetcher fetcherForURL:[ARFetcher URLForResource:source]];
+  NSURL *url = [ARFetcher URLForResource:source];
   
-  ARDescriptor *descriptor;
-  if((descriptor = [ARDescriptor descriptorWithContentsOfURL:[NSURL fileURLWithPath:source] error:&error]) == nil){
-    ARErrorDisplayError(error, @"could not load descriptor");
+  ARFetcher *fetcher;
+  if((fetcher = [ARFetcher fetcherForURL:url]) == nil){
+    ARLog(@"error: Resource type is not supported: %@", source);
     goto error;
   }
   
-  NSLog(@"OK: %@", descriptor.name);
-  NSLog(@"OK: %@", descriptor.parameters);
+  if((workingDirectory = ARPathMakeWorkingDirectory()) == nil){
+    ARLog(@"error: Could not create working directory");
+    goto error;
+  }
+  
+  NSString *templateDirectory = [workingDirectory stringByAppendingPathComponent:@"template"];
+  if(![fetcher fetchContentsOfURL:url destination:templateDirectory progress:NULL error:&error]){
+    ARErrorDisplayError(error, @"Could not fetch archetype");
+    goto error;
+  }
+  
+  NSString *descriptorPath = [templateDirectory stringByAppendingPathComponent:@"archetype.json"];
+  if(![[NSFileManager defaultManager] fileExistsAtPath:descriptorPath]){
+    ARLog(@"error: Archetype does not contain a descriptor named 'archetype.json'");
+    goto error;
+  }
+  
+  ARDescriptor *descriptor;
+  if((descriptor = [ARDescriptor descriptorWithContentsOfURL:[NSURL fileURLWithPath:descriptorPath] error:&error]) == nil){
+    ARErrorDisplayError(error, @"Could not load descriptor");
+    goto error;
+  }
+  
+  ARLog(@"%@", descriptor.name);
+  
+  for(ARParameter *parameter in descriptor.parameters){
+    [config collectPropertyForParameter:parameter];
+  }
   
 error:
-  ARPathDeleteWorkingDirectory();
+  if(workingDirectory) NSLog(@"WORKING: %@", workingDirectory); //ARPathDeleteWorkingDirectory(workingDirectory);
   
   return 0;
 }

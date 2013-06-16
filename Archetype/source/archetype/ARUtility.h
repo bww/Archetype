@@ -20,6 +20,6 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-NSString  * ARPathGetWorkingDirectory(void);
-void        ARPathDeleteWorkingDirectory(void);
+NSString  * ARPathMakeWorkingDirectory(void);
+void        ARPathDeleteWorkingDirectory(NSString *path);
 

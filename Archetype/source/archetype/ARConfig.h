@@ -20,6 +20,8 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
+@class ARParameter;
+
 /**
  * Archetype configuration.
  */
@@ -36,6 +38,9 @@
 -(void)setProperty:(NSString *)value forKey:(NSString *)key;
 -(void)setPropertyWithKeyValueDescriptor:(NSString *)pair;
 -(void)removePropertyForKey:(NSString *)key;
+
+-(BOOL)collectPropertyForParameter:(ARParameter *)parameter;
+-(BOOL)collectPropertyForParameter:(ARParameter *)parameter maxAttempts:(NSInteger)maxAttempts;
 
 @property (readonly) NSDictionary * archetype;
 @property (readonly) NSDictionary * properties;

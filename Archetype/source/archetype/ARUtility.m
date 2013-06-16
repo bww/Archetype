@@ -22,33 +22,26 @@
 
 #import "ARUtility.h"
 
-static NSString *__ARWorkingDirectory = nil;
-
 /**
- * Obtain the working directory.
+ * Create a working directory.
  */
-NSString * ARPathGetWorkingDirectory(void) {
-  if(__ARWorkingDirectory == nil){
-    
-    NSString *tempDirectory;
-    if((tempDirectory = NSTemporaryDirectory()) == nil) tempDirectory = @"/tmp";
-    NSString *tempTemplate = [tempDirectory stringByAppendingPathComponent: @"Archetype.XXXXXX"];
-    
-    char *cTempTemplate = strdup([tempTemplate UTF8String]);
-    NSString *workingDirectory = [[NSString alloc] initWithUTF8String:mkdtemp(cTempTemplate)];
-    if(cTempTemplate) free(cTempTemplate);
-    
-    __ARWorkingDirectory = workingDirectory;
-  }
-  return __ARWorkingDirectory;
+NSString * ARPathMakeWorkingDirectory(void) {
+  
+  NSString *tempDirectory;
+  if((tempDirectory = NSTemporaryDirectory()) == nil) tempDirectory = @"/tmp";
+  NSString *tempTemplate = [tempDirectory stringByAppendingPathComponent: @"Archetype.XXXXXX"];
+  
+  char *cTempTemplate = strdup([tempTemplate UTF8String]);
+  NSString *workingDirectory = [NSString stringWithUTF8String:mkdtemp(cTempTemplate)];
+  if(cTempTemplate) free(cTempTemplate);
+  
+  return workingDirectory;
 }
 
 /**
  * Delete the working directory if it exists
  */
-void ARPathDeleteWorkingDirectory(void) {
-  if(__ARWorkingDirectory != nil){
-    [[NSFileManager defaultManager] removeItemAtPath:__ARWorkingDirectory error:nil];
-  }
+void ARPathDeleteWorkingDirectory(NSString *workingDirectory) {
+  [[NSFileManager defaultManager] removeItemAtPath:workingDirectory error:nil];
 }
 

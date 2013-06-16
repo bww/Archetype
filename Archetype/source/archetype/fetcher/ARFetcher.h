@@ -29,6 +29,7 @@ typedef void (^ARFetcherProgressBlock)(float progress);
 
 +(NSURL *)URLForResource:(NSString *)pathOrURL;
 +(ARFetcher *)fetcherForURL:(NSURL *)url;
++(id)fetcher;
 
 -(BOOL)fetchContentsOfURL:(NSURL *)url destination:(NSString *)destination progress:(ARFetcherProgressBlock)progress error:(NSError **)error;
 

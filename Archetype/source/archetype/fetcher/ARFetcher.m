@@ -21,6 +21,8 @@
 // 
 
 #import "ARFetcher.h"
+#import "ARFileFetcher.h"
+#import "ARGitFetcher.h"
 
 @implementation ARFetcher
 
@@ -55,10 +57,17 @@
   }else if([scheme caseInsensitiveCompare:@"git"] == NSOrderedSame){
     NSLog(@"GIT: %@", [url absoluteString]);
   }else if([url isFileURL]){
-    NSLog(@"DIR: %@", [url absoluteString]);
+    return [ARFileFetcher fetcher];
   }
   
   return nil;
+}
+
+/**
+ * Create a new fetcher
+ */
++(id)fetcher {
+  return [[[self alloc] init] autorelease];
 }
 
 /**

@@ -21,6 +21,7 @@
 // 
 
 #import "ARFileFetcher.h"
+#import "ARUtility.h"
 
 @implementation ARFileFetcher
 
@@ -28,7 +29,31 @@
  * Fetch
  */
 -(BOOL)fetchContentsOfURL:(NSURL *)url destination:(NSString *)destination progress:(ARFetcherProgressBlock)progress error:(NSError **)error {
-  return TRUE;
+  BOOL directory = FALSE;
+  NSError *inner = nil;
+  BOOL status = FALSE;
+  
+  if(![url isFileURL]){
+    if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"%@ only supports file URLs", [self class]);
+    goto error;
+  }
+  
+  if(![[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&directory]){
+    if(error) *error = NSERROR_WITH_URL(ARArchetypeErrorDomain, ARStatusError, url, @"Archetype directory does not exist");
+    goto error;
+  }else if(!directory){
+    if(error) *error = NSERROR_WITH_URL(ARArchetypeErrorDomain, ARStatusError, url, @"Archetype path is not a directory");
+    goto error;
+  }
+  
+  if(![[NSFileManager defaultManager] copyItemAtPath:[url path] toPath:destination error:&inner]){
+    if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy archetype directory to the working directory");
+    goto error;
+  }
+  
+  status = TRUE;
+error:
+  return status;
 }
 
 @end

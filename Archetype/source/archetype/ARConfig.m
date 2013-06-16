@@ -21,6 +21,7 @@
 // 
 
 #import "ARConfig.h"
+#import "ARParameter.h"
 
 @implementation ARConfig
 
@@ -86,6 +87,37 @@
  */
 -(void)removePropertyForKey:(NSString *)key {
   [_properties removeObjectForKey:key];
+}
+
+/**
+ * Collect a configuration property value from the user interactively
+ */
+-(BOOL)collectPropertyForParameter:(ARParameter *)parameter {
+  return [self collectPropertyForParameter:parameter maxAttempts:0];
+}
+
+/**
+ * Collect a configuration property value from the user interactively
+ */
+-(BOOL)collectPropertyForParameter:(ARParameter *)parameter maxAttempts:(NSInteger)maxAttempts {
+  const char *prompt = [[NSString stringWithFormat:@"%@: ", (parameter.name != nil) ? parameter.name : parameter.identifier] UTF8String];
+  
+  for(int attempts = 0; maxAttempts <= 0 || attempts < maxAttempts; attempts++){
+    int maxlength = 1024;
+    char result[maxlength + 1];
+    fputs(prompt, stdout);
+    
+    if(fgets(result, maxlength, stdin) != NULL){
+      NSString *value = [[NSString stringWithUTF8String:result] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+      if([value length] > 0){
+        [self setProperty:value forKey:parameter.identifier];
+        return TRUE;
+      }
+    }
+    
+  }
+  
+  return FALSE;
 }
 
 @end
