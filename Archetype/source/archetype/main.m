@@ -109,11 +109,10 @@ int ARRun(int argc, const char * argv[]) {
     goto error;
   }
   
-  BOOL exists, directory;
-  if((exists = [[NSFileManager defaultManager] fileExistsAtPath:[outputURL path] isDirectory:&directory]) && !directory){
-    ARLog(@"error: Output path exists, but is not a directory");
+  if([[NSFileManager defaultManager] fileExistsAtPath:[outputURL path]]){
+    ARLog(@"error: Output path exists. If you really intend to overwrite it, delete it first and run Archetype again.");
     goto error;
-  }else if(!exists && ![[NSFileManager defaultManager] createDirectoryAtURL:outputURL withIntermediateDirectories:TRUE attributes:nil error:&error]){
+  }else if(![[NSFileManager defaultManager] createDirectoryAtURL:outputURL withIntermediateDirectories:TRUE attributes:nil error:&error]){
     ARErrorDisplayError(error, @"Could not create output directory");
     goto error;
   }
