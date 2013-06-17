@@ -36,21 +36,13 @@ typedef struct {
 /**
  * Display progress
  */
-static void ARGitFetcherDisplayProgress(const ARGitProgressInfo *info) {
-  long network_percent = (100 * info->fetch_progress.received_objects) / info->fetch_progress.total_objects;
-  long index_percent = (100 * info->fetch_progress.indexed_objects) / info->fetch_progress.total_objects;
-  long checkout_percent = info->total_steps > 0 ? (100 * info->completed_steps) / info->total_steps : 0.f;
-  long kbytes = info->fetch_progress.received_bytes / 1024;
-  
-  printf("net %3ld%% (%4ld kb, %5ld/%5ld)  /  idx %3ld%% (%5ld/%5ld)  /  chk %3ld%% (%4ld/%4ld) %s\n",
-    network_percent, kbytes,
-    info->fetch_progress.received_objects, info->fetch_progress.total_objects,
-    index_percent, info->fetch_progress.indexed_objects, info->fetch_progress.total_objects,
-    checkout_percent,
-    info->completed_steps, info->total_steps,
-    info->path
-  );
-  
+static void ARGitFetcherReportProgress(const ARGitProgressInfo *info) {
+  if(info->progress_block != NULL){
+    double network_percent = (double)info->fetch_progress.received_objects / (double)info->fetch_progress.total_objects;
+    double index_percent = (double)info->fetch_progress.indexed_objects / (double)info->fetch_progress.total_objects;
+    double checkout_percent = info->total_steps > 0 ? (double)info->completed_steps / (double)info->total_steps : 0.0f;
+    info->progress_block((index_percent + checkout_percent) / 2.0, info->fetch_progress.received_bytes);
+  }
 }
 
 /**
@@ -61,7 +53,7 @@ static void ARGitFetcherCheckoutProgressCallBack(const char *path, size_t curren
   info->completed_steps = current;
   info->total_steps = total;
   info->path = path;
-  ARGitFetcherDisplayProgress(info);
+  ARGitFetcherReportProgress(info);
 }
 
 /**
@@ -70,7 +62,7 @@ static void ARGitFetcherCheckoutProgressCallBack(const char *path, size_t curren
 static int ARGitFetcherFetchProgressCallBack(const git_transfer_progress *stats, void *data) {
   ARGitProgressInfo *info = (ARGitProgressInfo*)data;
   info->fetch_progress = *stats;
-  ARGitFetcherDisplayProgress(info);
+  ARGitFetcherReportProgress(info);
   return 0;
 }
 
@@ -136,6 +128,8 @@ static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const 
   clone_opts.fetch_progress_payload = &info;
   clone_opts.cred_acquire_cb = ARGitFetcherAcquireCredentialsCallBack;
   
+  fputs("Fetching archetype...\n", stdout);
+  
   if((z = git_clone(&clone, [[url absoluteString] UTF8String], [destination UTF8String], &clone_opts)) != 0){
     const git_error *giterr = giterr_last();
     if(error){
@@ -147,6 +141,8 @@ static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const 
     }
     goto error;
   }
+  
+  fputc('\n', stdout);
   
   status = TRUE;
 error:

@@ -134,8 +134,16 @@ int ARRun(int argc, const char * argv[]) {
     goto error;
   }
   
+  void (^progressReporter)(double progress, NSUInteger bytes) = ^(double progress, NSUInteger bytes) {
+    int count = 50;
+    printf("\rDownloading: [ ");
+    for(int i = 0; i < count; i++) fputc((roundf((double)count * progress) >= i) ? '#' : '-', stdout);
+    printf(" ] %.1f%%     ", (progress * 100.0));
+    fflush(stdout);
+  };
+  
   NSString *templateDirectory = [workingDirectory stringByAppendingPathComponent:@"template"];
-  if(![fetcher fetchContentsOfURL:sourceURL destination:templateDirectory progress:NULL error:&error]){
+  if(![fetcher fetchContentsOfURL:sourceURL destination:templateDirectory progress:progressReporter error:&error]){
     ARErrorDisplayError(error, @"Could not fetch archetype");
     goto error;
   }

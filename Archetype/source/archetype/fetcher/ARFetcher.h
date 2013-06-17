@@ -20,7 +20,7 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-typedef void (^ARFetcherProgressBlock)(float progress);
+typedef void (^ARFetcherProgressBlock)(double progress, NSUInteger bytes);
 
 /**
  * A fetcher loads an archetype from somewhere.
