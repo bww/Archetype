@@ -80,10 +80,7 @@
       goto error;
     }
     
-    if([name caseInsensitiveCompare:kARDescriptorStandardResourcePath] == NSOrderedSame){
-      // skip the archetype descriptor file, obviously
-      continue;
-    }
+    if([name caseInsensitiveCompare:kARDescriptorStandardResourcePath] == NSOrderedSame) continue;
     
     NSNumber *directory;
     if(![url getResourceValue:&directory forKey:NSURLIsDirectoryKey error:&inner]){
@@ -110,6 +107,11 @@
         if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy file");
         goto error;
       }
+    }else if(TRUE){
+      if(![self copyItemAtURL:url toURL:destURL filter:variableFilter error:&inner]){
+        if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy filtered file");
+        goto error;
+      }
     }else{
       if(![[NSFileManager defaultManager] copyItemAtURL:url toURL:destURL error:&inner]){
         if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy file");
@@ -122,6 +124,36 @@
   if(enumError != nil){
     if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, enumError, @"Could not read directory");
     [enumError release]; enumError = nil;
+    goto error;
+  }
+  
+  status = TRUE;
+error:
+  return status;
+}
+
+/**
+ * Copy and filter
+ */
+-(BOOL)copyItemAtURL:(NSURL *)sourceURL toURL:(NSURL *)destURL filter:(ARFilter *)filter error:(NSError **)error {
+  NSStringEncoding encoding;
+  NSError *inner = nil;
+  BOOL status = FALSE;
+  
+  NSString *content;
+  if((content = [NSString stringWithContentsOfURL:sourceURL usedEncoding:&encoding error:&inner]) == nil){
+    if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not read file");
+    goto error;
+  }
+  
+  NSString *filtered;
+  if((filtered = [filter filter:content configuration:self.config error:&inner]) == nil){
+    if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not filter file");
+    goto error;
+  }
+  
+  if(![filtered writeToURL:destURL atomically:TRUE encoding:encoding error:&inner]){
+    if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not write filtered content");
     goto error;
   }
   
