@@ -27,6 +27,8 @@
  */
 @interface ARFilter : NSObject
 
++(id)filter;
+
 -(NSString *)filter:(NSString *)content configuration:(ARConfig *)config error:(NSError **)error;
 
 @end

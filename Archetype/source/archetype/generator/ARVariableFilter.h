@@ -22,22 +22,12 @@
 
 #import "ARFilter.h"
 
-@implementation ARFilter
-
 /**
- * Create a filter
+ * Interpolate variables
  */
-+(id)filter {
-  return [[[self alloc] init] autorelease];
-}
+@interface ARVariableFilter : ARFilter
 
-/**
- * Filter content
- */
--(NSString *)filter:(NSString *)content configuration:(ARConfig *)config error:(NSError **)error {
-  if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Subclasses must implement: %s", __PRETTY_FUNCTION__);
-  return nil;
-}
+-(NSString *)filter:(NSString *)content configuration:(ARConfig *)config error:(NSError **)error;
 
 @end
 

@@ -25,6 +25,7 @@
 		D3834527176E5D88008A8194 /* ARGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834526176E5D88008A8194 /* ARGenerator.m */; };
 		D383452A176E782A008A8194 /* ARRelocator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834529176E782A008A8194 /* ARRelocator.m */; };
 		D383452D176E812A008A8194 /* ARFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383452C176E812A008A8194 /* ARFilter.m */; };
+		D3834530176E81C6008A8194 /* ARVariableFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383452F176E81C6008A8194 /* ARVariableFilter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +77,8 @@
 		D3834529176E782A008A8194 /* ARRelocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARRelocator.m; sourceTree = "<group>"; };
 		D383452B176E812A008A8194 /* ARFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFilter.h; sourceTree = "<group>"; };
 		D383452C176E812A008A8194 /* ARFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFilter.m; sourceTree = "<group>"; };
+		D383452E176E81C6008A8194 /* ARVariableFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARVariableFilter.h; sourceTree = "<group>"; };
+		D383452F176E81C6008A8194 /* ARVariableFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARVariableFilter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +221,8 @@
 				D3834529176E782A008A8194 /* ARRelocator.m */,
 				D383452B176E812A008A8194 /* ARFilter.h */,
 				D383452C176E812A008A8194 /* ARFilter.m */,
+				D383452E176E81C6008A8194 /* ARVariableFilter.h */,
+				D383452F176E81C6008A8194 /* ARVariableFilter.m */,
 			);
 			path = generator;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				D3834527176E5D88008A8194 /* ARGenerator.m in Sources */,
 				D383452A176E782A008A8194 /* ARRelocator.m in Sources */,
 				D383452D176E812A008A8194 /* ARFilter.m in Sources */,
+				D3834530176E81C6008A8194 /* ARVariableFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
