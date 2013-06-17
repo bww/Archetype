@@ -43,7 +43,7 @@
     if(c == echar){
       esc++;
     }else if(c == '$' && (i + 1) < length && GETCHAR(i + 1) == '{'){
-      if((esc & 2) == 0){
+      if((esc % 2) == 0){
         if(esc > 0) ADD_ESC(esc / 2); esc = 0;
         
         NSUInteger v;

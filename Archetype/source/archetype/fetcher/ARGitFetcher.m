@@ -41,7 +41,7 @@ static void ARGitFetcherReportProgress(const ARGitProgressInfo *info) {
     double network_percent = (double)info->fetch_progress.received_objects / (double)info->fetch_progress.total_objects;
     double index_percent = (double)info->fetch_progress.indexed_objects / (double)info->fetch_progress.total_objects;
     double checkout_percent = info->total_steps > 0 ? (double)info->completed_steps / (double)info->total_steps : 0.0f;
-    info->progress_block((index_percent + checkout_percent) / 2.0, info->fetch_progress.received_bytes);
+    info->progress_block((network_percent + index_percent + checkout_percent) / 3.0, info->fetch_progress.received_bytes);
   }
 }
 
@@ -128,8 +128,6 @@ static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const 
   clone_opts.fetch_progress_payload = &info;
   clone_opts.cred_acquire_cb = ARGitFetcherAcquireCredentialsCallBack;
   
-  fputs("Fetching archetype...\n", stdout);
-  
   if((z = git_clone(&clone, [[url absoluteString] UTF8String], [destination UTF8String], &clone_opts)) != 0){
     const git_error *giterr = giterr_last();
     if(error){
@@ -142,7 +140,7 @@ static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const 
     goto error;
   }
   
-  fputc('\n', stdout);
+  if(progress != NULL) fputc('\n', stdout);
   
   status = TRUE;
 error:

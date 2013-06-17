@@ -88,19 +88,16 @@
       goto error;
     }
     
-    NSString *filteredName;
-    if((filteredName = [variableFilter filter:name configuration:self.config error:&inner]) == nil){
-      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not filter filename '%@'", name);
-      goto error;
-    }
-    
     NSURL *destURL;
     if((destURL = [relocator outputURLForSourceURL:url error:&inner]) == nil){
       if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not relocate file");
       goto error;
     }
     
-    if(![filteredName isEqual:name]) destURL = [[destURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:filteredName];
+    if((destURL = [self filteredURL:destURL filter:variableFilter error:&inner]) == nil){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not filter relocated file path");
+      goto error;
+    }
     
     if([directory boolValue]){
       if(![[NSFileManager defaultManager] createDirectoryAtURL:destURL withIntermediateDirectories:FALSE attributes:nil error:&inner]){
@@ -130,6 +127,26 @@
   status = TRUE;
 error:
   return status;
+}
+
+/**
+ * Filter URL path components
+ */
+-(NSURL *)filteredURL:(NSURL *)url filter:(ARFilter *)filter error:(NSError **)error {
+  NSMutableArray *filteredComponents = [NSMutableArray array];
+  
+  for(NSString *component in [url pathComponents]){
+    NSError *inner = nil;
+    NSString *filteredComponent;
+    if((filteredComponent = [filter filter:component configuration:self.config error:&inner]) != nil){
+      [filteredComponents addObject:filteredComponent];
+    }else{
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not filter path");
+      return nil;
+    }
+  }
+  
+  return [NSURL fileURLWithPathComponents:filteredComponents];
 }
 
 /**
