@@ -98,10 +98,10 @@ int ARRun(int argc, const char * argv[]) {
   ARVariableFilter *filter = [ARVariableFilter filter];
   NSLog(@"<== %@", [filter filter:@"${ Hello }" configuration:config error:nil]);
   NSLog(@"<== %@", [filter filter:@"${ Hello }, this is a thing" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a thing ${ Hello }" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a thing ${ Hello } and some more" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a thing \\${ Hello } and some more" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a thing \\\\${ Hello } and some more" configuration:config error:nil]);
+  NSLog(@"<== %@", [filter filter:@"This is a \\thing ${ Hello }" configuration:config error:nil]);
+  NSLog(@"<== %@", [filter filter:@"This is a \\\\thing ${ Hello } and some more" configuration:config error:nil]);
+  NSLog(@"<== %@", [filter filter:@"This is a \\\\\\thing \\${ Hello } and some more" configuration:config error:nil]);
+  NSLog(@"<== %@", [filter filter:@"This is a \\\\\\\\thing \\\\${ Hello } and some more" configuration:config error:nil]);
   NSLog(@"<== %@", [filter filter:@"This is a thing \\\\\\${ Hello } and some more" configuration:config error:nil]);
   NSLog(@"<== %@", [filter filter:@"This is a thing \\\\\\\\${ Hello } and some more" configuration:config error:nil]);
   

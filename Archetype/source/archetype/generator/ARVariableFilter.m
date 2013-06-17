@@ -52,13 +52,12 @@
         NSString *ident = [[content substringWithRange:NSMakeRange(i + 2 /* skip '${' */, v - i - 2 /* compensate */)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         NSString *value;
-        if((value = [config propertyForKey:ident]) != nil){
-          [output appendString:value];
-        }else{
+        if((value = [config propertyForKey:ident]) == nil){
           if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Property '%@' is not defined in configuration. Did you mean to escape this property expression? Use '\\${ %@ }' for a the literal text '${'...", ident, ident);
           goto error;
         }
         
+        [output appendString:value];
         i = v;
       }else{
         if(esc > 0) ADD_ESC((esc - 1) / 2); esc = 0;
