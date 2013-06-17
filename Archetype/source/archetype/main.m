@@ -95,23 +95,6 @@ int ARRun(int argc, const char * argv[]) {
   argv += optind;
   argc -= optind;
   
-  ARVariableFilter *filter = [ARVariableFilter filter];
-  NSLog(@"<== %@", [filter filter:@"${ Hello }" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"${ Hello }, this is a thing" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a \\thing ${ Hello }" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a \\\\thing ${ Hello } and some more" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a \\\\\\thing \\${ Hello } and some more" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a \\\\\\\\thing \\\\${ Hello } and some more" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a thing \\\\\\${ Hello } and some more" configuration:config error:nil]);
-  NSLog(@"<== %@", [filter filter:@"This is a thing \\\\\\\\${ Hello } and some more" configuration:config error:nil]);
-  
-  if([filter filter:@"${ Hello }" configuration:config error:&error] == nil){
-    ARErrorDisplayError(error, @"Could not filter");
-    goto error;
-  }
-  
-  return 0;
-  
   if(argc < 2){
     ARUsage(stderr);
     goto error;
