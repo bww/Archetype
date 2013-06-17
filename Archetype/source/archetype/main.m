@@ -110,7 +110,7 @@ int ARRun(int argc, const char * argv[]) {
   }
   
   if([[NSFileManager defaultManager] fileExistsAtPath:[outputURL path]]){
-    ARLog(@"error: Output path exists. If you really intend to overwrite it, delete it first and run Archetype again.");
+    ARLog(@"error: Output path exists. If you really intend to overwrite this path, delete it first and run Archetype again.");
     goto error;
   }else if(![[NSFileManager defaultManager] createDirectoryAtURL:outputURL withIntermediateDirectories:TRUE attributes:nil error:&error]){
     ARErrorDisplayError(error, @"Could not create output directory");

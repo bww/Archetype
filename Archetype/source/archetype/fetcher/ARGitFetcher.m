@@ -20,6 +20,8 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
+#import <Git2/git2.h>
+
 #import "ARGitFetcher.h"
 
 @implementation ARGitFetcher
