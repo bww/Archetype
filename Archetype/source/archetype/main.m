@@ -55,6 +55,7 @@ int ARRun(int argc, const char * argv[]) {
   
   static struct option longopts[] = {
     { "define",           required_argument,  NULL,         'D' },  // define a property
+    { "force",            no_argument,        NULL,         'f' },  // force overwrite
     { "debug",            no_argument,        NULL,         'd' },  // debug mode
     { "verbose",          no_argument,        NULL,         'v' },  // be more verbose
     { "help",             no_argument,        NULL,         'h' },  // display help info
@@ -62,11 +63,15 @@ int ARRun(int argc, const char * argv[]) {
   };
   
   int flag;
-  while((flag = getopt_long(argc, (char **)argv, "D:dvh", longopts, NULL)) != -1){
+  while((flag = getopt_long(argc, (char **)argv, "D:fdvh", longopts, NULL)) != -1){
     switch(flag){
       
       case 'D':
         [config setPropertyWithKeyValueDescriptor:[NSString stringWithUTF8String:optarg]];
+        break;
+        
+      case 'f':
+        context.options |= kAROptionForce;
         break;
         
       case 'd':
@@ -109,8 +114,15 @@ int ARRun(int argc, const char * argv[]) {
     goto error;
   }
   
-  if([[NSFileManager defaultManager] fileExistsAtPath:[outputURL path]]){
-    ARLog(@"error: Output path exists. If you really intend to overwrite this path, delete it first and run Archetype again.");
+  BOOL exists, directory;
+  if((exists = [[NSFileManager defaultManager] fileExistsAtPath:[outputURL path] isDirectory:&directory]) && (context.options & kAROptionForce) != kAROptionForce){
+    ARLog(@"error: Output path exists. If you really intend to overwrite this path use the -f | --force option.");
+    goto error;
+  }else if(exists & !directory){
+    ARLog(@"error: Output path exists but it is not a directory.");
+    goto error;
+  }else if(exists && ![[NSFileManager defaultManager] removeItemAtURL:outputURL error:&error]){
+    ARErrorDisplayError(error, @"Could not create remove existing output directory");
     goto error;
   }else if(![[NSFileManager defaultManager] createDirectoryAtURL:outputURL withIntermediateDirectories:TRUE attributes:nil error:&error]){
     ARErrorDisplayError(error, @"Could not create output directory");
@@ -178,6 +190,7 @@ void ARUsage(FILE *stream) {
     "\n"
     "Options:\n"
     " -D --define <key>=<value>     Define a configuration parameter.\n"
+    " -f --force                    Overwrite the output path even if it exists.\n"
     " -v --verbose                  Be more verbose.\n"
     " -h --help                     Display this help information.\n"
     "\n"

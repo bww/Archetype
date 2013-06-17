@@ -23,7 +23,8 @@
 enum {
   kAROptionNone     = 0,
   kAROptionVerbose  = 1 << 0,
-  kAROptionDebug    = 1 << 1
+  kAROptionDebug    = 1 << 1,
+  kAROptionForce    = 1 << 2
 };
 
 typedef unsigned int AROptions;

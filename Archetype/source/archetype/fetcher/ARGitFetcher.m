@@ -21,8 +21,61 @@
 // 
 
 #import <Git2/git2.h>
+#import <pwd.h>
 
 #import "ARGitFetcher.h"
+
+typedef struct {
+  git_transfer_progress fetch_progress;
+  size_t                completed_steps;
+  size_t                total_steps;
+  const char          * path;
+} ARGitProgressInfo;
+
+/**
+ * Checkout progress
+ */
+static void ARGitFetcherCheckoutProgressCallBack(const char *path, size_t current, size_t total, void *data) {
+  //
+}
+
+/**
+ * Fetch progress
+ */
+static int ARGitFetcherFetchProgressCallBack(const git_transfer_progress *stats, void *data) {
+  return 0;
+}
+
+/**
+ * Credentials
+ */
+static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const char *url, const char *username_from_url, unsigned int allowed_types, void *data) {
+  printf("Credentials are required for: %s\n", url);
+  
+  int maxlen = _PASSWORD_LEN;
+  char username[maxlen + 1], *password;
+  
+  if(username_from_url){
+    printf("Username [%s]: ", username_from_url);
+  }else{
+    printf("Username: ");
+  }
+  
+  if(fgets(username, maxlen, stdin) == NULL) return -1;
+  if(strlen(username) < 2 /* one character plus newline */){
+    if(username_from_url != NULL && strlen(username_from_url) < maxlen){
+      strcpy(username, username_from_url);
+    }else{
+      return -1;
+    }
+  }else{
+    username[strlen(username) - 1] = 0; // trim off '\n'
+  }
+  
+  if((password = getpass("Password: ")) == NULL || strlen(password) < 1) return -1;
+  
+  return git_cred_userpass_plaintext_new(credentials, username, password);
+}
 
 @implementation ARGitFetcher
 
@@ -30,7 +83,40 @@
  * Fetch
  */
 -(BOOL)fetchContentsOfURL:(NSURL *)url destination:(NSString *)destination progress:(ARFetcherProgressBlock)progress error:(NSError **)error {
-  return TRUE;
+  git_repository *clone = NULL;
+  BOOL status = FALSE;
+  int z;
+  
+  git_clone_options clone_opts = GIT_CLONE_OPTIONS_INIT;
+  git_checkout_opts checkout_opts = GIT_CHECKOUT_OPTS_INIT;
+  ARGitProgressInfo info;
+  
+  checkout_opts.checkout_strategy = GIT_CHECKOUT_SAFE_CREATE;
+  checkout_opts.progress_cb = ARGitFetcherCheckoutProgressCallBack;
+  checkout_opts.progress_payload = &info;
+  
+  clone_opts.checkout_opts = checkout_opts;
+  clone_opts.fetch_progress_cb = ARGitFetcherFetchProgressCallBack;
+  clone_opts.fetch_progress_payload = &info;
+  clone_opts.cred_acquire_cb = ARGitFetcherAcquireCredentialsCallBack;
+  
+  if((z = git_clone(&clone, [[url absoluteString] UTF8String], [destination UTF8String], &clone_opts)) != 0){
+    const git_error *giterr = giterr_last();
+    if(error){
+      if(giterr){
+        *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Could not checkout repository: %s", giterr->message);
+      }else{
+        *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Could not checkout repository");
+      }
+    }
+    goto error;
+  }
+  
+  status = TRUE;
+error:
+  if(clone) git_repository_free(clone);
+  
+  return status;
 }
 
 @end

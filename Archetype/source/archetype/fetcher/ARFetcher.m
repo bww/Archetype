@@ -47,15 +47,15 @@
   NSString *scheme = url.scheme;
   
   if([scheme caseInsensitiveCompare:@"ssh"] == NSOrderedSame){
-    NSLog(@"GIT: %@", [url absoluteString]);
+    return [ARGitFetcher fetcher];
   }else if([scheme caseInsensitiveCompare:@"http"] == NSOrderedSame && [[url pathExtension] caseInsensitiveCompare:@"git"] == NSOrderedSame){
-    NSLog(@"GIT: %@", [url absoluteString]);
+    return [ARGitFetcher fetcher];
   }else if([scheme caseInsensitiveCompare:@"https"] == NSOrderedSame && [[url pathExtension] caseInsensitiveCompare:@"git"] == NSOrderedSame){
-    NSLog(@"GIT: %@", [url absoluteString]);
+    return [ARGitFetcher fetcher];
   }else if([scheme caseInsensitiveCompare:@"file"] == NSOrderedSame && [[url pathExtension] caseInsensitiveCompare:@"git"] == NSOrderedSame){
-    NSLog(@"GIT: %@", [url absoluteString]);
+    return [ARGitFetcher fetcher];
   }else if([scheme caseInsensitiveCompare:@"git"] == NSOrderedSame){
-    NSLog(@"GIT: %@", [url absoluteString]);
+    return [ARGitFetcher fetcher];
   }else if([url isFileURL]){
     return [ARFileFetcher fetcher];
   }

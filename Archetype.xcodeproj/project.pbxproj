@@ -26,6 +26,9 @@
 		D383452A176E782A008A8194 /* ARRelocator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834529176E782A008A8194 /* ARRelocator.m */; };
 		D383452D176E812A008A8194 /* ARFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383452C176E812A008A8194 /* ARFilter.m */; };
 		D3834530176E81C6008A8194 /* ARVariableFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383452F176E81C6008A8194 /* ARVariableFilter.m */; };
+		D3834532176F4A4A008A8194 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834531176F4A4A008A8194 /* libz.dylib */; };
+		D3834534176F4A5F008A8194 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834533176F4A5F008A8194 /* libssl.dylib */; };
+		D383453A176F52CE008A8194 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834539176F52CE008A8194 /* libcrypto.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +82,9 @@
 		D383452C176E812A008A8194 /* ARFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFilter.m; sourceTree = "<group>"; };
 		D383452E176E81C6008A8194 /* ARVariableFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARVariableFilter.h; sourceTree = "<group>"; };
 		D383452F176E81C6008A8194 /* ARVariableFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARVariableFilter.m; sourceTree = "<group>"; };
+		D3834531176F4A4A008A8194 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D3834533176F4A5F008A8194 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
+		D3834539176F52CE008A8194 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,9 @@
 			files = (
 				D35BA14A176BC2C500CC1BFB /* Foundation.framework in Frameworks */,
 				D35BA15E176BCA2200CC1BFB /* Git2.framework in Frameworks */,
+				D383453A176F52CE008A8194 /* libcrypto.dylib in Frameworks */,
+				D3834534176F4A5F008A8194 /* libssl.dylib in Frameworks */,
+				D3834532176F4A4A008A8194 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +125,9 @@
 			children = (
 				D35BA149176BC2C500CC1BFB /* Foundation.framework */,
 				D35BA15D176BCA2200CC1BFB /* Git2.framework */,
+				D3834539176F52CE008A8194 /* libcrypto.dylib */,
+				D3834533176F4A5F008A8194 /* libssl.dylib */,
+				D3834531176F4A4A008A8194 /* libz.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -364,6 +376,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Archetype/source/Archetype-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Archetype/library/Git2.framework/Headers\"";
 				OTHER_CFLAGS = "-D__ARCHETYPE_DEBUG__";
 				PRODUCT_NAME = archetype;
 			};
@@ -378,6 +391,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Archetype/source/Archetype-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Archetype/library/Git2.framework/Headers\"";
 				PRODUCT_NAME = archetype;
 			};
 			name = Release;
