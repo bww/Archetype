@@ -31,8 +31,6 @@
 #import "ARDescriptor.h"
 #import "ARParameter.h"
 
-#import "ARVariableFilter.h"
-
 int   ARRun(int argc, const char * argv[]);
 void  ARUsage(FILE *stream);
 

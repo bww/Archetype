@@ -28,7 +28,6 @@
  * Filter content
  */
 -(NSString *)filter:(NSString *)content configuration:(ARConfig *)config error:(NSError **)error {
-  NSLog(@"==> %@", content);
   NSMutableString *output = [NSMutableString string];
   NSUInteger length = [content length];
   

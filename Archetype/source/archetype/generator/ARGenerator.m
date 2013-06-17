@@ -22,6 +22,7 @@
 
 #import "ARGenerator.h"
 #import "ARRelocator.h"
+#import "ARVariableFilter.h"
 
 @implementation ARGenerator
 
@@ -60,6 +61,7 @@
  */
 -(BOOL)generateWithSourceURL:(NSURL *)sourceURL outputURL:(NSURL *)outputURL error:(NSError **)error {
   ARRelocator *relocator = [ARRelocator relocatorWithSourceBaseURL:sourceURL outputBaseURL:outputURL];
+  ARVariableFilter *variableFilter = [ARVariableFilter filter];
   NSError *inner = nil;
   BOOL status = FALSE;
   
@@ -89,10 +91,30 @@
       goto error;
     }
     
+    NSString *filteredName;
+    if((filteredName = [variableFilter filter:name configuration:self.config error:&inner]) == nil){
+      if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not filter filename '%@'", name);
+      goto error;
+    }
+    
     NSURL *destURL;
     if((destURL = [relocator outputURLForSourceURL:url error:&inner]) == nil){
       if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not relocate file");
       goto error;
+    }
+    
+    if(![filteredName isEqual:name]) destURL = [[destURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:filteredName];
+    
+    if([directory boolValue]){
+      if(![[NSFileManager defaultManager] createDirectoryAtURL:destURL withIntermediateDirectories:FALSE attributes:nil error:&inner]){
+        if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy file");
+        goto error;
+      }
+    }else{
+      if(![[NSFileManager defaultManager] copyItemAtURL:url toURL:destURL error:&inner]){
+        if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy file");
+        goto error;
+      }
     }
     
   }
