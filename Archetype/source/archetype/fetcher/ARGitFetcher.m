@@ -26,23 +26,51 @@
 #import "ARGitFetcher.h"
 
 typedef struct {
-  git_transfer_progress fetch_progress;
-  size_t                completed_steps;
-  size_t                total_steps;
-  const char          * path;
+  ARFetcherProgressBlock  progress_block;
+  git_transfer_progress   fetch_progress;
+  size_t                  completed_steps;
+  size_t                  total_steps;
+  const char            * path;
 } ARGitProgressInfo;
+
+/**
+ * Display progress
+ */
+static void ARGitFetcherDisplayProgress(const ARGitProgressInfo *info) {
+  long network_percent = (100 * info->fetch_progress.received_objects) / info->fetch_progress.total_objects;
+  long index_percent = (100 * info->fetch_progress.indexed_objects) / info->fetch_progress.total_objects;
+  long checkout_percent = info->total_steps > 0 ? (100 * info->completed_steps) / info->total_steps : 0.f;
+  long kbytes = info->fetch_progress.received_bytes / 1024;
+  
+  printf("net %3ld%% (%4ld kb, %5ld/%5ld)  /  idx %3ld%% (%5ld/%5ld)  /  chk %3ld%% (%4ld/%4ld) %s\n",
+    network_percent, kbytes,
+    info->fetch_progress.received_objects, info->fetch_progress.total_objects,
+    index_percent, info->fetch_progress.indexed_objects, info->fetch_progress.total_objects,
+    checkout_percent,
+    info->completed_steps, info->total_steps,
+    info->path
+  );
+  
+}
 
 /**
  * Checkout progress
  */
 static void ARGitFetcherCheckoutProgressCallBack(const char *path, size_t current, size_t total, void *data) {
-  //
+  ARGitProgressInfo *info = (ARGitProgressInfo*)data;
+  info->completed_steps = current;
+  info->total_steps = total;
+  info->path = path;
+  ARGitFetcherDisplayProgress(info);
 }
 
 /**
  * Fetch progress
  */
 static int ARGitFetcherFetchProgressCallBack(const git_transfer_progress *stats, void *data) {
+  ARGitProgressInfo *info = (ARGitProgressInfo*)data;
+  info->fetch_progress = *stats;
+  ARGitFetcherDisplayProgress(info);
   return 0;
 }
 
@@ -61,7 +89,10 @@ static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const 
     printf("Username: ");
   }
   
-  if(fgets(username, maxlen, stdin) == NULL) return -1;
+  if(fgets(username, maxlen, stdin) == NULL){
+    return -1;
+  }
+  
   if(strlen(username) < 2 /* one character plus newline */){
     if(username_from_url != NULL && strlen(username_from_url) < maxlen){
       strcpy(username, username_from_url);
@@ -72,7 +103,9 @@ static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const 
     username[strlen(username) - 1] = 0; // trim off '\n'
   }
   
-  if((password = getpass("Password: ")) == NULL || strlen(password) < 1) return -1;
+  if((password = getpass("Password: ")) == NULL || strlen(password) < 1){
+    return -1;
+  }
   
   return git_cred_userpass_plaintext_new(credentials, username, password);
 }
@@ -89,7 +122,10 @@ static int ARGitFetcherAcquireCredentialsCallBack(git_cred **credentials, const 
   
   git_clone_options clone_opts = GIT_CLONE_OPTIONS_INIT;
   git_checkout_opts checkout_opts = GIT_CHECKOUT_OPTS_INIT;
+  
   ARGitProgressInfo info;
+  bzero(&info, sizeof(ARGitProgressInfo));
+  info.progress_block = progress;
   
   checkout_opts.checkout_strategy = GIT_CHECKOUT_SAFE_CREATE;
   checkout_opts.progress_cb = ARGitFetcherCheckoutProgressCallBack;
