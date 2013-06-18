@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D35BA14A176BC2C500CC1BFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35BA149176BC2C500CC1BFB /* Foundation.framework */; };
-		D35BA151176BC2C500CC1BFB /* archetype.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D35BA150176BC2C500CC1BFB /* archetype.1 */; };
 		D35BA15B176BC32500CC1BFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA15A176BC32500CC1BFB /* main.m */; };
 		D35BA15E176BCA2200CC1BFB /* Git2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35BA15D176BCA2200CC1BFB /* Git2.framework */; };
 		D35BA164176BCE6C00CC1BFB /* ARContext.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BA163176BCE6C00CC1BFB /* ARContext.m */; };
@@ -30,19 +29,6 @@
 		D3834534176F4A5F008A8194 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834533176F4A5F008A8194 /* libssl.dylib */; };
 		D383453A176F52CE008A8194 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834539176F52CE008A8194 /* libcrypto.dylib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		D35BA144176BC2C500CC1BFB /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(INSTALL_PATH)";
-			dstSubfolderSpec = 0;
-			files = (
-				D35BA151176BC2C500CC1BFB /* archetype.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D35BA146176BC2C500CC1BFB /* archetype */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = archetype; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,7 +234,6 @@
 			buildPhases = (
 				D35BA142176BC2C500CC1BFB /* Sources */,
 				D35BA143176BC2C500CC1BFB /* Frameworks */,
-				D35BA144176BC2C500CC1BFB /* CopyFiles */,
 			);
 			buildRules = (
 			);

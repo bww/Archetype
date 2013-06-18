@@ -11,7 +11,7 @@ class Archetype < Formula
     # install the tool
     bin.install("#{prefix}/archetype");
     # install the manpage
-    man.install("#{prefix}/archetype.1");
+    man.install("Archetype/resources/man1/archetype.1");
   end
   
 end
