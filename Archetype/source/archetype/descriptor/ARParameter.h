@@ -20,22 +20,31 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
+enum {
+  kARParameterOptionNone    = 0,
+  kARParameterOptionSecure  = 1 << 0
+};
+
+typedef unsigned int ARParameterOptions;
+
 /**
  * A parameter used in an archetype descriptor
  */
 @interface ARParameter : NSObject {
   
-  NSString  * _identifier;
-  NSString  * _name;
+  NSString          * _identifier;
+  NSString          * _name;
+  ARParameterOptions  _options;
   
 }
 
-+(ARParameter *)parameterWithIdentifier:(NSString *)identifier name:(NSString *)name;
++(ARParameter *)parameterWithIdentifier:(NSString *)identifier name:(NSString *)name options:(ARParameterOptions)options;
 
--(id)initWithIdentifier:(NSString *)identifier name:(NSString *)name;
+-(id)initWithIdentifier:(NSString *)identifier name:(NSString *)name options:(ARParameterOptions)options;
 
-@property (readonly) NSString * identifier;
-@property (readonly) NSString * name;
+@property (readonly) NSString         * identifier;
+@property (readonly) NSString         * name;
+@property (readonly) ARParameterOptions options;
 
 @end
 

@@ -167,12 +167,6 @@ int ARRun(int argc, const char * argv[]) {
     }
   }
   
-  if((context.options & kAROptionDebug) == kAROptionDebug){
-    for(id key in config.properties){
-      ARLog(@"%@ = %@", key, [config propertyForKey:key]);
-    }
-  }
-  
   ARGenerator *generator = [ARGenerator generatorWithDescriptor:descriptor configuration:config];
   if(![generator generateWithSourceURL:[NSURL fileURLWithPath:templateDirectory] outputURL:outputURL error:&error]){
     ARErrorDisplayError(error, @"Could not generate project");

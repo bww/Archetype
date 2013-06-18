@@ -26,12 +26,13 @@
 
 @synthesize identifier = _identifier;
 @synthesize name = _name;
+@synthesize options = _options;
 
 /**
  * Create a parameter
  */
-+(ARParameter *)parameterWithIdentifier:(NSString *)identifier name:(NSString *)name {
-  return [[[self alloc] initWithIdentifier:identifier name:name] autorelease];
++(ARParameter *)parameterWithIdentifier:(NSString *)identifier name:(NSString *)name options:(ARParameterOptions)options {
+  return [[[self alloc] initWithIdentifier:identifier name:name options:options] autorelease];
 }
 
 /**
@@ -46,10 +47,11 @@
 /**
  * Initialize
  */
--(id)initWithIdentifier:(NSString *)identifier name:(NSString *)name {
+-(id)initWithIdentifier:(NSString *)identifier name:(NSString *)name options:(ARParameterOptions)options {
   if((self = [super init]) != nil){
     _identifier = [identifier retain];
     _name = [name retain];
+    _options = options;
   }
   return self;
 }

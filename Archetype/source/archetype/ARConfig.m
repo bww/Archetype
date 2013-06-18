@@ -20,6 +20,8 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
+#import <pwd.h>
+
 #import "ARConfig.h"
 #import "ARParameter.h"
 
@@ -103,13 +105,20 @@
   const char *prompt = [[NSString stringWithFormat:@"%@: ", (parameter.name != nil) ? parameter.name : parameter.identifier] UTF8String];
   
   for(int attempts = 0; maxAttempts <= 0 || attempts < maxAttempts; attempts++){
-    int maxlength = 1024;
-    char result[maxlength + 1];
-    fputs(prompt, stdout);
+    int maxlength = 256;
+    char buffer[maxlength + 1];
+    char *rp = NULL;
     
-    if(fgets(result, maxlength, stdin) != NULL){
-      NSString *value = [[NSString stringWithUTF8String:result] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-      if([value length] > 0){
+    if((parameter.options & kARParameterOptionSecure) == kARParameterOptionSecure){
+      rp = getpass(prompt);
+    }else{
+      fputs(prompt, stdout);
+      rp = fgets(buffer, maxlength, stdin);
+    }
+    
+    if(rp != NULL){
+      NSString *value;
+      if((value = [[NSString stringWithUTF8String:rp] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]) != nil && [value length] > 0){
         [self setProperty:value forKey:parameter.identifier];
         return TRUE;
       }

@@ -101,6 +101,8 @@ error:
   if((parameterDescriptors = [descriptor objectForKey:@"parameters"]) != nil){
     for(NSDictionary *parameterDescriptor in parameterDescriptors){
       NSString *identifier = nil, *name = nil;
+      ARParameterOptions options = kARParameterOptionNone;
+      id value;
       
       if(![parameterDescriptor isKindOfClass:[NSDictionary class]]){
         if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Parameter descriptor must be an object with the properties: 'id', 'name'");
@@ -117,7 +119,16 @@ error:
         return nil;
       }
       
-      [parameters addObject:[ARParameter parameterWithIdentifier:identifier name:name]];
+      if((value = [parameterDescriptor objectForKey:@"secure"]) != nil){
+        if([value isKindOfClass:[NSNumber class]]){
+          options |= kARParameterOptionSecure;
+        }else if([value boolValue]){
+          if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Parameter descriptor property 'secure' must be a boolean");
+          return nil;
+        }
+      }
+      
+      [parameters addObject:[ARParameter parameterWithIdentifier:identifier name:name options:options]];
     }
   }
   
