@@ -6,7 +6,12 @@ class Archetype < Formula
   version '1'
   
   def install
-    system "xcodebuild", "-target", "Archetype", "-configuration", "Release", "DSTROOT=/", "SYMROOT=build", "install"
+    # build Archetype
+    system "xcodebuild", "-target", "Archetype", "-configuration", "Release", "DSTROOT=/", "INSTALL_PATH=#{prefix}", "SYMROOT=build", "install"
+    # install the tool
+    bin.install("#{prefix}/archetype");
+    # install the manpage
+    man.install("#{prefix}/archetype.1");
   end
   
 end
