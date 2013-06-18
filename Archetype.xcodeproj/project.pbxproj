@@ -35,7 +35,7 @@
 		D35BA144176BC2C500CC1BFB /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			dstPath = /usr/local/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
 				D35BA151176BC2C500CC1BFB /* archetype.1 in CopyFiles */,
