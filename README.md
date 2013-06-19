@@ -3,7 +3,7 @@ Archetype is a **general-purpose parameterized project initialization tool** for
 
 Archetype lets you set up a software project exactly how you want it *once* and then easily create new instances of it, configured and ready to go.
 
-## Sounds familiar
+## Sounds familiar?
 Archetype shares similar aims with Maven archetypes, Ruby on Rails, Play! Framework, and other platforms that do templated project initialization to get you started faster.
 
 Unlike those projects, Archetype is both **general-purpose** and **simple**. It doesn't care what kind of project it's used for and it requires very little configuration or formality.
@@ -25,10 +25,10 @@ When you want to create a new instance of a project you can point Archetype at a
  3. For text files, substitue the parameter values you provided for any variables
  4. Copy each file from the project template into the directory you specify
 
-When it's done, you'll have a new project configured, ready for you to start working.
+When it's done, you'll have a new project configured and ready for you to start working.
 
 # Creating project templates
-You can use any Git repository (or a local directory) as a project template. A project template is essentially just an actual project which uses some configuration variables. The only requirement is that an Archetype configuration file, named `archetype.json`, must be at the root of the project. This file is used only by Archetype and is excluded from the generated project.
+You can use any Git repository (or a local directory) as a project template. A project template is essentially just an actual project which uses some configuration variables that are substituted with user-provided values. The only requirement is that an Archetype configuration file, named `archetype.json`, must be at the root of the project. This file is used only by Archetype and is excluded from generated projects.
 
 In `archetype.json` you can define the parameters used in your project, and throughout your template you can use those parameters in variable expressions.
 
@@ -50,6 +50,11 @@ An example Archetype configuration file might look like this:
 	  ]
 	}
 
+For each object in the 	`parameters` list you define:
+
+ * `id` the identifier (variable) of the parameter.
+ * `name` the name of the parameter. This is the text the user is prompted with when Archetype asks them to define a parameter.
+
 ## Using parameters
 You can use the parameters defined in the Archetype configuration anywhere you like in your template project by using a variable expression. When Archetype encounters a variable expression in a text-base file it is substituted with the corresponding parameter value.
 
@@ -59,7 +64,7 @@ Variable expressions are defined using the following form:
 	
 ... where `parameter_name` refers to a parameter `id` in your `archetype.json` file. Whitespace surrounding the parameter identifier is ignored: `${name}` is the same as `${  name  }`.
 
-For example, maybe your project needs to configure a database, you might have a file like this:
+For example, maybe your project needs a database configuration file – you might have a file like this:
 
 	# Example database configuration for ${FULL_NAME}.
 	
@@ -67,7 +72,7 @@ For example, maybe your project needs to configure a database, you might have a 
 	database_username = '${DB_USERNAME}'
 	database_password = '${DB_PASSWORD}'
 
-... and Archetype will generate something like
+... for which Archetype will generate something like this, based on the user's input:
 
 	# Example database configuration for My Great Project
 	
@@ -82,13 +87,13 @@ If, for some reason, you need to use the literal string `${...}` in your project
 
 Or, if you need a literal `\` before a substituted variable, you can do:
 
-	Substitued variable with literal backslash \\${ parameter_name }
+	Substituted variable with literal backslash \\${ parameter_name }
 
 And so on...
 
 	Literal variable expression with literal backslash \\\${ parameter_name }
 
-Note that **Archetype does not treat the `\` character specially anywhere else in your files**, only when it a sequence of backslashes immediately precede a variable expression.
+Note that **Archetype does not treat the `\` character specially anywhere else in your files**. A sequence of backslashes is only significant to Archetype when it immediately precedes a variable expression. In any other case it is copied literally.
 
 ## Which files get variable substitution?
 Since only text files can be scanned for variable substituion, not all files are filtered. Out of the box, Archetype will scan for variable expressions in files with a [UTI](http://en.wikipedia.org/wiki/Uniform_Type_Identifier) that conforms to any of the following:
