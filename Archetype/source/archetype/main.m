@@ -185,7 +185,7 @@ error:
 void ARUsage(FILE *stream) {
   fputs(
     "Archetype - a parameterized project template generator\n"
-    "Copyright 2013 Brian William Wolter\n"
+    "https://github.com/bww/Archetype\n"
     "\n"
     "Usage: archetype [options] <url> <path>\n"
     " Help: man archetype\n"
