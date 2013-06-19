@@ -197,7 +197,7 @@ void ARUsage(FILE *stream) {
     " -h --help                     Display this help information.\n"
     "\n"
     "Example:\n"
-    " $ archetype git@github.com/user/project.git ./my_project\n"
+    " $ archetype https://github.com/bww/ArchetypeExample.git ./example_project\n"
     "\n"
   , stream);
 }
