@@ -23,11 +23,15 @@
 		D3834520176D1C89008A8194 /* ARParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383451F176D1C89008A8194 /* ARParameter.m */; };
 		D3834527176E5D88008A8194 /* ARGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834526176E5D88008A8194 /* ARGenerator.m */; };
 		D383452A176E782A008A8194 /* ARRelocator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3834529176E782A008A8194 /* ARRelocator.m */; };
-		D383452D176E812A008A8194 /* ARFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383452C176E812A008A8194 /* ARFilter.m */; };
-		D3834530176E81C6008A8194 /* ARVariableFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D383452F176E81C6008A8194 /* ARVariableFilter.m */; };
 		D3834532176F4A4A008A8194 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834531176F4A4A008A8194 /* libz.dylib */; };
 		D3834534176F4A5F008A8194 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834533176F4A5F008A8194 /* libssl.dylib */; };
 		D383453A176F52CE008A8194 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3834539176F52CE008A8194 /* libcrypto.dylib */; };
+		D3E213B117714FC000F7220D /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E213B017714FC000F7220D /* CoreServices.framework */; };
+		D3E213C11771579500F7220D /* ARFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E213B71771579500F7220D /* ARFilter.m */; };
+		D3E213C21771579500F7220D /* ARVariableFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E213B91771579500F7220D /* ARVariableFilter.m */; };
+		D3E213C31771579500F7220D /* ARExtensionMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E213BC1771579500F7220D /* ARExtensionMatcher.m */; };
+		D3E213C41771579500F7220D /* ARMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E213BE1771579500F7220D /* ARMatcher.m */; };
+		D3E213C51771579500F7220D /* ARUTIMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E213C01771579500F7220D /* ARUTIMatcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,13 +68,20 @@
 		D3834526176E5D88008A8194 /* ARGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGenerator.m; sourceTree = "<group>"; };
 		D3834528176E782A008A8194 /* ARRelocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARRelocator.h; sourceTree = "<group>"; };
 		D3834529176E782A008A8194 /* ARRelocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARRelocator.m; sourceTree = "<group>"; };
-		D383452B176E812A008A8194 /* ARFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFilter.h; sourceTree = "<group>"; };
-		D383452C176E812A008A8194 /* ARFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFilter.m; sourceTree = "<group>"; };
-		D383452E176E81C6008A8194 /* ARVariableFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARVariableFilter.h; sourceTree = "<group>"; };
-		D383452F176E81C6008A8194 /* ARVariableFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARVariableFilter.m; sourceTree = "<group>"; };
 		D3834531176F4A4A008A8194 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3834533176F4A5F008A8194 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
 		D3834539176F52CE008A8194 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
+		D3E213B017714FC000F7220D /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		D3E213B61771579500F7220D /* ARFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFilter.h; sourceTree = "<group>"; };
+		D3E213B71771579500F7220D /* ARFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFilter.m; sourceTree = "<group>"; };
+		D3E213B81771579500F7220D /* ARVariableFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARVariableFilter.h; sourceTree = "<group>"; };
+		D3E213B91771579500F7220D /* ARVariableFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARVariableFilter.m; sourceTree = "<group>"; };
+		D3E213BB1771579500F7220D /* ARExtensionMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARExtensionMatcher.h; sourceTree = "<group>"; };
+		D3E213BC1771579500F7220D /* ARExtensionMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARExtensionMatcher.m; sourceTree = "<group>"; };
+		D3E213BD1771579500F7220D /* ARMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMatcher.h; sourceTree = "<group>"; };
+		D3E213BE1771579500F7220D /* ARMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARMatcher.m; sourceTree = "<group>"; };
+		D3E213BF1771579500F7220D /* ARUTIMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARUTIMatcher.h; sourceTree = "<group>"; };
+		D3E213C01771579500F7220D /* ARUTIMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARUTIMatcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D35BA14A176BC2C500CC1BFB /* Foundation.framework in Frameworks */,
+				D3E213B117714FC000F7220D /* CoreServices.framework in Frameworks */,
 				D35BA15E176BCA2200CC1BFB /* Git2.framework in Frameworks */,
 				D383453A176F52CE008A8194 /* libcrypto.dylib in Frameworks */,
 				D3834534176F4A5F008A8194 /* libssl.dylib in Frameworks */,
@@ -110,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				D35BA149176BC2C500CC1BFB /* Foundation.framework */,
+				D3E213B017714FC000F7220D /* CoreServices.framework */,
 				D35BA15D176BCA2200CC1BFB /* Git2.framework */,
 				D3834539176F52CE008A8194 /* libcrypto.dylib */,
 				D3834533176F4A5F008A8194 /* libssl.dylib */,
@@ -213,16 +226,38 @@
 		D3834524176E5D88008A8194 /* generator */ = {
 			isa = PBXGroup;
 			children = (
+				D3E213B51771579500F7220D /* filter */,
+				D3E213BA1771579500F7220D /* matcher */,
 				D3834525176E5D88008A8194 /* ARGenerator.h */,
 				D3834526176E5D88008A8194 /* ARGenerator.m */,
 				D3834528176E782A008A8194 /* ARRelocator.h */,
 				D3834529176E782A008A8194 /* ARRelocator.m */,
-				D383452B176E812A008A8194 /* ARFilter.h */,
-				D383452C176E812A008A8194 /* ARFilter.m */,
-				D383452E176E81C6008A8194 /* ARVariableFilter.h */,
-				D383452F176E81C6008A8194 /* ARVariableFilter.m */,
 			);
 			path = generator;
+			sourceTree = "<group>";
+		};
+		D3E213B51771579500F7220D /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				D3E213B61771579500F7220D /* ARFilter.h */,
+				D3E213B71771579500F7220D /* ARFilter.m */,
+				D3E213B81771579500F7220D /* ARVariableFilter.h */,
+				D3E213B91771579500F7220D /* ARVariableFilter.m */,
+			);
+			path = filter;
+			sourceTree = "<group>";
+		};
+		D3E213BA1771579500F7220D /* matcher */ = {
+			isa = PBXGroup;
+			children = (
+				D3E213BB1771579500F7220D /* ARExtensionMatcher.h */,
+				D3E213BC1771579500F7220D /* ARExtensionMatcher.m */,
+				D3E213BD1771579500F7220D /* ARMatcher.h */,
+				D3E213BE1771579500F7220D /* ARMatcher.m */,
+				D3E213BF1771579500F7220D /* ARUTIMatcher.h */,
+				D3E213C01771579500F7220D /* ARUTIMatcher.m */,
+			);
+			path = matcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,8 +324,11 @@
 				D3834520176D1C89008A8194 /* ARParameter.m in Sources */,
 				D3834527176E5D88008A8194 /* ARGenerator.m in Sources */,
 				D383452A176E782A008A8194 /* ARRelocator.m in Sources */,
-				D383452D176E812A008A8194 /* ARFilter.m in Sources */,
-				D3834530176E81C6008A8194 /* ARVariableFilter.m in Sources */,
+				D3E213C11771579500F7220D /* ARFilter.m in Sources */,
+				D3E213C21771579500F7220D /* ARVariableFilter.m in Sources */,
+				D3E213C31771579500F7220D /* ARExtensionMatcher.m in Sources */,
+				D3E213C41771579500F7220D /* ARMatcher.m in Sources */,
+				D3E213C51771579500F7220D /* ARUTIMatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

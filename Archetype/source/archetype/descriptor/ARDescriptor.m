@@ -22,6 +22,7 @@
 
 #import "ARDescriptor.h"
 #import "ARParameter.h"
+#import "ARExtensionMatcher.h"
 #import "JSONKit.h"
 
 NSString * const kARDescriptorStandardResourcePath = @"archetype.json";
@@ -30,6 +31,7 @@ NSString * const kARDescriptorStandardResourcePath = @"archetype.json";
 
 @synthesize name = _name;
 @synthesize parameters = _parameters;
+@synthesize matchers = _matchers;
 
 /**
  * Create a descriptor from the provided resource
@@ -44,6 +46,7 @@ NSString * const kARDescriptorStandardResourcePath = @"archetype.json";
 -(void)dealloc {
   [_descriptor release];
   [_parameters release];
+  [_matchers release];
   [super dealloc];
 }
 
@@ -79,6 +82,11 @@ NSString * const kARDescriptorStandardResourcePath = @"archetype.json";
     if((parameters = [self parametersFromDescriptor:descriptor error:&inner]) == nil){
       if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not load archetype parameters");
       goto error;
+    }
+    
+    NSArray *matchers;
+    if((matchers = [self matchersFromDescriptor:descriptor error:&inner]) != nil){
+      _matchers = [matchers retain];
     }
     
     _name = [name retain];
@@ -133,6 +141,56 @@ error:
   }
   
   return parameters;
+}
+
+/**
+ * Obtain matchers from the provided descriptor
+ */
+-(NSArray *)matchersFromDescriptor:(NSDictionary *)descriptor error:(NSError **)error {
+  NSMutableArray *matchers = [NSMutableArray array];
+  
+  NSArray *matcherDescriptors;
+  if((matcherDescriptors = [descriptor objectForKey:@"filter-file-types"]) != nil){
+    for(NSDictionary *matcherDescriptor in matcherDescriptors){
+      NSArray *pathExtensions;
+      if((pathExtensions = [matcherDescriptor objectForKey:@"extensions"]) != nil){
+        
+        if(![pathExtensions isKindOfClass:[NSArray class]]){
+          if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Extension matcher must have the form: \"extensions\": [ \"list\", \"of\", \"file\", \"extensions\" ].");
+          return nil;
+        }
+        
+        for(NSString *extension in pathExtensions){
+          if(![extension isKindOfClass:[NSString class]]){
+            if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Extensions for an extension matcher must be strings.");
+            return nil;
+          }
+        }
+        
+        [matchers addObject:[ARExtensionMatcher extensionMatcherWithPathExtensions:[NSSet setWithArray:pathExtensions]]];
+        
+      }else{
+        if(error) *error = NSERROR(ARArchetypeErrorDomain, ARStatusError, @"Unsupported matcher descriptor encountered: %@", matcherDescriptor);
+        return nil;
+      }
+    }
+  }
+  
+  return matchers;
+}
+
+/**
+ * Determine if a URL should be filtered, based on this descriptor's matcher set
+ */
+-(BOOL)shouldFilterURL:(NSURL *)url {
+  
+  if(_matchers != nil){
+    for(ARMatcher *matcher in _matchers){
+      if([matcher matches:url]) return TRUE;
+    }
+  }
+  
+  return FALSE;
 }
 
 @end

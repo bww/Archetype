@@ -20,30 +20,14 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-extern NSString * const kARDescriptorStandardResourcePath;
+#import "ARConfig.h"
 
 /**
- * An archetype descriptor describes how to generate a project from its
- * archetype. This represents the archetype.json file.
+ * Matches files
  */
-@interface ARDescriptor : NSObject {
-  
-  NSDictionary  * _descriptor;
-  NSString      * _name;
-  NSArray       * _parameters;
-  NSArray       * _matchers;
-  
-}
+@interface ARMatcher : NSObject
 
-+(ARDescriptor *)descriptorWithContentsOfURL:(NSURL *)url error:(NSError **)error;
-
--(id)initWithContentsOfURL:(NSURL *)url error:(NSError **)error;
-
--(BOOL)shouldFilterURL:(NSURL *)url;
-
-@property (readonly) NSString * name;
-@property (readonly) NSArray  * parameters;
-@property (readonly) NSArray  * matchers;
+-(BOOL)matches:(NSURL *)url;
 
 @end
 

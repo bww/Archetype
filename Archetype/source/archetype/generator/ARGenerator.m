@@ -22,6 +22,7 @@
 
 #import "ARGenerator.h"
 #import "ARRelocator.h"
+#import "ARUTIMatcher.h"
 #import "ARVariableFilter.h"
 
 @implementation ARGenerator
@@ -104,7 +105,7 @@
         if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy file");
         goto error;
       }
-    }else if(TRUE){
+    }else if([self.descriptor shouldFilterURL:url]){
       if(![self copyItemAtURL:url toURL:destURL filter:variableFilter error:&inner]){
         if(error) *error = NSERROR_WITH_CAUSE(ARArchetypeErrorDomain, ARStatusError, inner, @"Could not copy filtered file");
         goto error;

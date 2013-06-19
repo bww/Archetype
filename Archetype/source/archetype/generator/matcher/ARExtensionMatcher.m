@@ -20,30 +20,52 @@
 // DEALINGS IN THE SOFTWARE.
 // 
 
-extern NSString * const kARDescriptorStandardResourcePath;
+#import "ARExtensionMatcher.h"
+
+@implementation ARExtensionMatcher
+
+@synthesize pathExtensions = _pathExtensions;
 
 /**
- * An archetype descriptor describes how to generate a project from its
- * archetype. This represents the archetype.json file.
+ * Create a matcher with UTIs
  */
-@interface ARDescriptor : NSObject {
-  
-  NSDictionary  * _descriptor;
-  NSString      * _name;
-  NSArray       * _parameters;
-  NSArray       * _matchers;
-  
++(ARExtensionMatcher *)extensionMatcherWithPathExtensions:(NSSet *)pathExtensions {
+  return [[[self alloc] initWithPathExtensions:pathExtensions] autorelease];
 }
 
-+(ARDescriptor *)descriptorWithContentsOfURL:(NSURL *)url error:(NSError **)error;
+/**
+ * Clean up
+ */
+-(void)dealloc {
+  [_pathExtensions release];
+  [super dealloc];
+}
 
--(id)initWithContentsOfURL:(NSURL *)url error:(NSError **)error;
+/**
+ * Initialize
+ */
+-(id)initWithPathExtensions:(NSSet *)pathExtensions {
+  if((self = [super init]) != nil){
+    _pathExtensions = [pathExtensions retain];
+  }
+  return self;
+}
 
--(BOOL)shouldFilterURL:(NSURL *)url;
-
-@property (readonly) NSString * name;
-@property (readonly) NSArray  * parameters;
-@property (readonly) NSArray  * matchers;
+/**
+ * Match a URL
+ */
+-(BOOL)matches:(NSURL *)url {
+  BOOL result = FALSE;
+  
+  NSString *extension;
+  if((extension = [url pathExtension]) != nil){
+    for(NSString *check in self.pathExtensions){
+      if((result = ([extension caseInsensitiveCompare:check] == NSOrderedSame)) == TRUE) break;
+    }
+  }
+  
+  return result;
+}
 
 @end
 
