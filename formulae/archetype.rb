@@ -3,7 +3,7 @@ require 'formula'
 class Archetype < Formula
   
   url 'https://github.com/bww/Archetype.git'
-  version '2'
+  version '3'
   
   def install
     # build Archetype
