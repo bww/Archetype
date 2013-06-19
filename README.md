@@ -1,12 +1,12 @@
 # Archetype
 Archetype is a **general-purpose parameterized project initialization tool** for OS X. It creates configured instances of a particular kind of project from an archetypical example of that type of project – usually a Git repository.
 
-Archetype lets you set up a software project exactly how you want it *once* and then easily create new instances of it.
+Archetype lets you set up a software project exactly how you want it *once* and then easily create new instances of it, configured and ready to go.
 
 # Sounds familiar
 Archetype shares similar aims with Maven archetypes, Ruby on Rails, Play! Framework, and other platforms that do templated project initialization to get you started faster.
 
-The main idea is to let you setup how you like a particular kind of project once and then allow you to quickly and easily create a new instance of it. Unlike those projects, Archetype is **general-purpose** and **simple**. It doesn't care what kind of project it's used for and it requires very little configuration or formality.
+Unlike those projects, Archetype is both **general-purpose** and **simple**. It doesn't care what kind of project it's used for and it requires very little configuration or formality.
 
 # Try it out
 If you aren't interested in making changes, the easiest way to install Archetype is using Homebrew:
