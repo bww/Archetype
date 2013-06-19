@@ -2,8 +2,8 @@ require 'formula'
 
 class Archetype < Formula
   
-  url 'https://bitbucket.org/bww/archetype.git'
-  version '1'
+  url 'https://github.com/bww/Archetype.git'
+  version '2'
   
   def install
     # build Archetype
