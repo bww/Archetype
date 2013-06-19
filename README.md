@@ -13,7 +13,7 @@ If you aren't interested in making changes, the easiest way to install Archetype
 
 	$ brew install https://raw.github.com/bww/Archetype/master/formulae/archetype.rb
 
-Then try it out on the example project:
+Then try it out on the Archetype example project:
 
 	$ archetype https://github.com/bww/ArchetypeExample.git ./MyExample
 		
